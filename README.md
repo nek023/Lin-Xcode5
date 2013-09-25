@@ -45,13 +45,14 @@ You can enable/disable Lin or show window manually by opening the Lin menu in th
 
 
 ## Notes
-* .strings files must be UTF-8
+* `.strings` files must be UTF-8
 * Supported functions:
   * NSLocalizedString
   * NSLocalizedStringFromTable
   * NSLocalizedStringFromTableInBundle
   * NSLocalizedStringWithDefaultValue
   * localizedStringForKey:value:table:
+* After modifying a `.string` file, don't forget to save otherwise new strings won't appear in completion popup
 
 
 ## License
