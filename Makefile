@@ -2,7 +2,7 @@ test:
 	xcodebuild \
 		-project Lin.xcodeproj \
 		-sdk macosx \
-		-scheme Lin \
+		-scheme LinTests \
 		-configuration Debug \
 		clean test
 
