@@ -102,6 +102,9 @@
 		AA470D6A17C3D380005CBB7F /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		AA470D6E17C3D380005CBB7F /* LinTests-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "LinTests-Prefix.pch"; sourceTree = "<group>"; };
 		AA470D7C17C3DE31005CBB7F /* LNDetectorTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LNDetectorTests.m; sourceTree = "<group>"; };
+		AA7B0CAD17F4228E0004FE3B /* DVTDualProxyWindow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DVTDualProxyWindow.h; sourceTree = "<group>"; };
+		AA7B0CB017F4229D0004FE3B /* IDEWorkspaceWindow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IDEWorkspaceWindow.h; sourceTree = "<group>"; };
+		AA7B0CB317F422BB0004FE3B /* DVTSourceTextView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DVTSourceTextView.h; sourceTree = "<group>"; };
 		AA7D4DAF17C74CFE0092DF8A /* LNLocalizationCollection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LNLocalizationCollection.h; sourceTree = "<group>"; };
 		AA7D4DB017C74CFE0092DF8A /* LNLocalizationCollection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LNLocalizationCollection.m; sourceTree = "<group>"; };
 		AA7D4DB217C74D0A0092DF8A /* LNLocalization.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LNLocalization.h; sourceTree = "<group>"; };
@@ -304,6 +307,9 @@
 				AA11AC4317C6746800889DFB /* IDEIndex.h */,
 				AA11AC4617C6755400889DFB /* IDEIndexCollection.h */,
 				AADEADBB17C872EB001E0C65 /* IDEEditorDocument.h */,
+				AA7B0CAD17F4228E0004FE3B /* DVTDualProxyWindow.h */,
+				AA7B0CB017F4229D0004FE3B /* IDEWorkspaceWindow.h */,
+				AA7B0CB317F422BB0004FE3B /* DVTSourceTextView.h */,
 			);
 			name = "Xcode-Private-Classes";
 			sourceTree = "<group>";

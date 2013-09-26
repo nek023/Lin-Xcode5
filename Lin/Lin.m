@@ -14,6 +14,8 @@
 #import "IDEIndex.h"
 #import "IDEIndexCollection.h"
 #import "IDEEditorDocument.h"
+#import "IDEWorkspaceWindow.h"
+#import "DVTSourceTextView.h"
 
 // Categories
 #import "NSBundle+versions.h"
@@ -33,7 +35,7 @@
 // Controllers
 #import "LNPopoverWindowController.h"
 
-static Lin *_sharedManager = nil;
+static Lin *_sharedPlugin = nil;
 
 @interface NSPopover ()
 
@@ -67,13 +69,13 @@ static Lin *_sharedManager = nil;
 {
     static dispatch_once_t _onceToken;
     dispatch_once(&_onceToken, ^{
-        _sharedManager = [[Lin alloc] initWithBundle:bundle];
+        _sharedPlugin = [[Lin alloc] initWithBundle:bundle];
     });
 }
 
 + (instancetype)sharedPlugIn
 {
-    return _sharedManager;
+    return _sharedPlugin;
 }
 
 - (instancetype)init
@@ -245,7 +247,7 @@ static Lin *_sharedManager = nil;
 
 - (void)textDidChange:(NSNotification *)notification
 {
-	if ([[notification object] isKindOfClass:NSClassFromString(@"DVTSourceTextView")]) {
+	if ([[notification object] isKindOfClass:[DVTSourceTextView class]]) {
         NSTextView *textView = (NSTextView *)[notification object];
         self.textView = textView;
         
@@ -262,7 +264,7 @@ static Lin *_sharedManager = nil;
 
 - (void)textViewDidChangeSelection:(NSNotification *)notification
 {
-	if ([[notification object] isKindOfClass:NSClassFromString(@"DVTSourceTextView")]) {
+	if ([[notification object] isKindOfClass:[DVTSourceTextView class]]) {
         NSTextView *textView = (NSTextView *)[notification object];
         self.textView = textView;
         
@@ -279,7 +281,7 @@ static Lin *_sharedManager = nil;
 
 - (void)workspaceWindowDidBecomeMain:(NSNotification *)notification
 {
-    if ([[notification object] isKindOfClass:NSClassFromString(@"IDEWorkspaceWindow")]) {
+    if ([[notification object] isKindOfClass:[IDEWorkspaceWindow class]]) {
         NSWindow *workspaceWindow = (NSWindow *)[notification object];
         NSWindowController *workspaceWindowController = (NSWindowController *)workspaceWindow.windowController;
         
