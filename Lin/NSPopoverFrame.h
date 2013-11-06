@@ -12,5 +12,9 @@
 
 - (void)_drawMinimalPopoverAppearanceInRect:(struct CGRect)arg1 anchorEdge:(unsigned long long)arg2 anchorPoint:(struct CGPoint)arg3;
 
+- (struct CGImage *)_imageMaskForPath:(struct CGPath *)arg1 anchorEdge:(unsigned long long)arg2 anchorPoint:(struct CGPoint)arg3;
+- (struct CGPath *)_newMinimalAppearancePathInBounds:(struct CGRect)arg1 anchorEdge:(unsigned long long)arg2 anchorPoint:(struct CGPoint)arg3 topCapOnly:(BOOL)arg4 arrowOffset:(double)arg5;
+- (struct CGPath *)_newMinimalAppearancePathInBounds:(struct CGRect)arg1 anchorEdge:(unsigned long long)arg2 arrowPosition:(double)arg3 topCapOnly:(BOOL)arg4 arrowOffset:(double)arg5;
+
 @end
 
