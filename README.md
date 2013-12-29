@@ -2,6 +2,8 @@
 Lin is a open source plug-in for **Xcode 5**.  
 It lets you search/manage localizations without opening the .strings files.
 
+[![Build Status](https://travis-ci.org/questbeat/Lin-Xcode5.png?branch=master)](https://travis-ci.org/questbeat/Lin-Xcode5)
+
 ![01.png](http://questbe.at/lin/img/screenshots/01.png)
 
 Lin for Xcode 4 (previous version)  
