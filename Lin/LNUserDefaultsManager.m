@@ -8,7 +8,7 @@
 
 #import "LNUserDefaultsManager.h"
 
-static NSString * const LNUserDefaultManagerEnabledKey = @"enabled";
+static NSString * const LNUserDefaultManagerEnabledKey = @"jp.questbeat.Lin.enabled";
 
 @implementation LNUserDefaultsManager
 
