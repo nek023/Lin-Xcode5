@@ -93,6 +93,13 @@
 {
     NSMutableSet *localizations = [NSMutableSet set];
     
+    // Don't load localizations from frameworks
+    if( [self.filePath rangeOfString:@".framework/"
+                             options:NSCaseInsensitiveSearch ].location != NSNotFound )
+    {
+        return;
+    };
+    
     // Load contents
     NSString *contents = [self loadContentsOfFile:self.filePath];
     
