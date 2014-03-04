@@ -45,8 +45,6 @@ static Lin *_sharedPlugin = nil;
 
 @interface Lin ()
 
-@property (nonatomic, strong, readwrite) NSBundle *bundle;
-
 @property (nonatomic, strong) NSPopover *popover;
 @property (nonatomic, strong) LNPopoverWindowController *popoverWindowController;
 
@@ -69,7 +67,7 @@ static Lin *_sharedPlugin = nil;
 {
     static dispatch_once_t _onceToken;
     dispatch_once(&_onceToken, ^{
-        _sharedPlugin = [[Lin alloc] initWithBundle:bundle];
+        _sharedPlugin = [[self alloc] init];
     });
 }
 
@@ -80,16 +78,10 @@ static Lin *_sharedPlugin = nil;
 
 - (instancetype)init
 {
-    return [self initWithBundle:nil];
-}
-
-- (instancetype)initWithBundle:(NSBundle *)bundle
-{
     self = [super init];
     
     if (self) {
         // Initialization
-        self.bundle = bundle;
         self.detector = [LNDetector detector];
         self.workspaceLocalizations = [NSMutableDictionary dictionary];
         
@@ -138,7 +130,8 @@ static Lin *_sharedPlugin = nil;
                                                    object:nil];
         
         // Show the version information
-        NSLog(@"Lin v%@ was successfully loaded.", [self.bundle shortVersionString]);
+        NSBundle *bundle = [NSBundle bundleForClass:[self class]];
+        NSLog(@"Lin ver.%@ was successfully loaded.", [bundle shortVersionString]);
         
         // Activate if enabled
         if ([[LNUserDefaultsManager sharedManager] isEnabled]) {
@@ -151,7 +144,8 @@ static Lin *_sharedPlugin = nil;
 
 - (void)instantiatePopover
 {
-    NSViewController *contentViewController = [[NSViewController alloc] initWithNibName:@"PopoverContentView" bundle:self.bundle];
+    NSBundle *bundle = [NSBundle bundleForClass:[self class]];
+    NSViewController *contentViewController = [[NSViewController alloc] initWithNibName:@"LNPopoverContentView" bundle:bundle];
     
     NSPopover *popover = [[NSPopover alloc] init];
     popover.delegate = self;
@@ -165,7 +159,8 @@ static Lin *_sharedPlugin = nil;
 
 - (void)instantiatePopoverWindowController
 {
-    NSViewController *contentViewController = [[NSViewController alloc] initWithNibName:@"PopoverContentView" bundle:self.bundle];
+    NSBundle *bundle = [NSBundle bundleForClass:[self class]];
+    NSViewController *contentViewController = [[NSViewController alloc] initWithNibName:@"LNPopoverContentView" bundle:bundle];
     LNPopoverContentView *contentView = (LNPopoverContentView *)contentViewController.view;
     [contentView.detachButton setHidden:YES];
     
@@ -364,7 +359,7 @@ static Lin *_sharedPlugin = nil;
 }
 
 
-#pragma mark - Detachig the Popover
+#pragma mark - Detachig Popover
 
 - (void)preparePopoverWindow
 {
@@ -509,19 +504,15 @@ static Lin *_sharedPlugin = nil;
 - (void)showVersionInfo:(id)sender
 {
     // Create alert
+    NSBundle *bundle = [NSBundle bundleForClass:[self class]];
     NSAlert *alert = [NSAlert alertWithMessageText:@"Lin"
                                      defaultButton:@"OK"
                                    alternateButton:nil
                                        otherButton:@"Open Website"
-                         informativeTextWithFormat:@"Version %@\n\nCopyright (c) 2013 Katsuma Tanaka\n\nEmail: questbeat@gmail.com\nTwitter: @questbeat", [self.bundle shortVersionString]];
+                         informativeTextWithFormat:@"Version %@\n\nCopyright (c) 2013 Katsuma Tanaka\n\nEmail: questbeat@gmail.com\nTwitter: @questbeat", [bundle shortVersionString]];
     
     // Set icon
-    NSString *filePath;
-    if ([[NSScreen mainScreen] backingScaleFactor] == 2.0) {
-        filePath = [self.bundle pathForResource:@"icon120@2x" ofType:@"png"];
-    } else {
-        filePath = [self.bundle pathForResource:@"icon120" ofType:@"png"];
-    }
+    NSString *filePath = [bundle pathForResource:@"icon120" ofType:@"tiff"];
     NSImage *icon = [[NSImage alloc] initWithContentsOfFile:filePath];
     [alert setIcon:icon];
     

@@ -7,14 +7,13 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		AA02CE8B17EE08240041C2BD /* AlertAccessoryView.xib in Resources */ = {isa = PBXBuildFile; fileRef = AA02CE8A17EE08240041C2BD /* AlertAccessoryView.xib */; };
+		AA02CE8B17EE08240041C2BD /* LNAlertAccessoryView.xib in Resources */ = {isa = PBXBuildFile; fileRef = AA02CE8A17EE08240041C2BD /* LNAlertAccessoryView.xib */; };
 		AA02CE8E17EE083A0041C2BD /* LNAlertAccessoryView.m in Sources */ = {isa = PBXBuildFile; fileRef = AA02CE8D17EE083A0041C2BD /* LNAlertAccessoryView.m */; };
 		AA1B7DA717C3C1EC00A3A6D7 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AA1B7DA617C3C1EC00A3A6D7 /* Cocoa.framework */; };
 		AA1B7DB117C3C1EC00A3A6D7 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = AA1B7DAF17C3C1EC00A3A6D7 /* InfoPlist.strings */; };
 		AA1B7DBA17C3C20F00A3A6D7 /* Lin.m in Sources */ = {isa = PBXBuildFile; fileRef = AA1B7DB917C3C20F00A3A6D7 /* Lin.m */; };
 		AA20D87F17ECB12A006B7CA2 /* NSPopoverFrame+Lin.m in Sources */ = {isa = PBXBuildFile; fileRef = AA20D87E17ECB12A006B7CA2 /* NSPopoverFrame+Lin.m */; };
 		AA2980B417EE2C5300CF46E3 /* LNUserDefaultsManager.m in Sources */ = {isa = PBXBuildFile; fileRef = AA2980B317EE2C5300CF46E3 /* LNUserDefaultsManager.m */; };
-		AA31DF3918C5C07E00AAA101 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AA31DF3818C5C07E00AAA101 /* Images.xcassets */; };
 		AA36376617D9EF9E003C5E55 /* LNPopoverContentView.m in Sources */ = {isa = PBXBuildFile; fileRef = AA36376517D9EF9E003C5E55 /* LNPopoverContentView.m */; };
 		AA3EC36F17EB2A290003A180 /* DVTFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AA3EC36D17EB2A290003A180 /* DVTFoundation.framework */; };
 		AA3EC37017EB2A290003A180 /* DVTKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AA3EC36E17EB2A290003A180 /* DVTKit.framework */; };
@@ -25,10 +24,19 @@
 		AA470D6517C3D380005CBB7F /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AA470D6417C3D380005CBB7F /* XCTest.framework */; };
 		AA470D6B17C3D380005CBB7F /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = AA470D6917C3D380005CBB7F /* InfoPlist.strings */; };
 		AA470D7D17C3DE31005CBB7F /* LNDetectorTests.m in Sources */ = {isa = PBXBuildFile; fileRef = AA470D7C17C3DE31005CBB7F /* LNDetectorTests.m */; };
+		AA6377CE18C5CCFC005EADC7 /* LNImageButtonCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AA6377CD18C5CCFC005EADC7 /* LNImageButtonCell.m */; };
+		AA63897918C6019A0061C2C4 /* icon_plus@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = AA63897118C6019A0061C2C4 /* icon_plus@2x.png */; };
+		AA63897A18C6019A0061C2C4 /* icon_minus.png in Resources */ = {isa = PBXBuildFile; fileRef = AA63897218C6019A0061C2C4 /* icon_minus.png */; };
+		AA63897B18C6019A0061C2C4 /* icon_minus@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = AA63897318C6019A0061C2C4 /* icon_minus@2x.png */; };
+		AA63897C18C6019A0061C2C4 /* icon120.png in Resources */ = {isa = PBXBuildFile; fileRef = AA63897418C6019A0061C2C4 /* icon120.png */; };
+		AA63897D18C6019A0061C2C4 /* icon_plus.png in Resources */ = {isa = PBXBuildFile; fileRef = AA63897518C6019A0061C2C4 /* icon_plus.png */; };
+		AA63897E18C6019A0061C2C4 /* icon_detach@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = AA63897618C6019A0061C2C4 /* icon_detach@2x.png */; };
+		AA63897F18C6019A0061C2C4 /* icon120@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = AA63897718C6019A0061C2C4 /* icon120@2x.png */; };
+		AA63898018C6019A0061C2C4 /* icon_detach.png in Resources */ = {isa = PBXBuildFile; fileRef = AA63897818C6019A0061C2C4 /* icon_detach.png */; };
 		AA7D4DB117C74CFE0092DF8A /* LNLocalizationCollection.m in Sources */ = {isa = PBXBuildFile; fileRef = AA7D4DB017C74CFE0092DF8A /* LNLocalizationCollection.m */; };
 		AA7D4DB417C74D0A0092DF8A /* LNLocalization.m in Sources */ = {isa = PBXBuildFile; fileRef = AA7D4DB317C74D0A0092DF8A /* LNLocalization.m */; };
 		AA8F8EF017EDFC68004964FB /* NSTableView+editedColumnIdentifier.m in Sources */ = {isa = PBXBuildFile; fileRef = AA8F8EEF17EDFC68004964FB /* NSTableView+editedColumnIdentifier.m */; };
-		AA95FDEC17EB48A9007D33D4 /* PopoverContentView.xib in Resources */ = {isa = PBXBuildFile; fileRef = AA95FDEB17EB48A9007D33D4 /* PopoverContentView.xib */; };
+		AA95FDEC17EB48A9007D33D4 /* LNPopoverContentView.xib in Resources */ = {isa = PBXBuildFile; fileRef = AA95FDEB17EB48A9007D33D4 /* LNPopoverContentView.xib */; };
 		AA95FDEF17EB4E77007D33D4 /* LNPopoverWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = AA95FDEE17EB4E77007D33D4 /* LNPopoverWindowController.m */; };
 		AAAC873317ED9D4F00BF251D /* LNHorizontalLine.m in Sources */ = {isa = PBXBuildFile; fileRef = AAAC873217ED9D4F00BF251D /* LNHorizontalLine.m */; };
 		AAAC873B17EDA9CF00BF251D /* LNPopoverWindow.m in Sources */ = {isa = PBXBuildFile; fileRef = AAAC873A17EDA9CF00BF251D /* LNPopoverWindow.m */; };
@@ -43,7 +51,6 @@
 		AADEADB317C7B6D3001E0C65 /* LNLocalizationTests.m in Sources */ = {isa = PBXBuildFile; fileRef = AADEADB217C7B6D3001E0C65 /* LNLocalizationTests.m */; };
 		AADEADB417C7B838001E0C65 /* LNLocalization.m in Sources */ = {isa = PBXBuildFile; fileRef = AA7D4DB317C74D0A0092DF8A /* LNLocalization.m */; };
 		AADEADB717C87298001E0C65 /* IDEIndex+Lin.m in Sources */ = {isa = PBXBuildFile; fileRef = AADEADB617C87298001E0C65 /* IDEIndex+Lin.m */; };
-		AADEADBA17C872A5001E0C65 /* IDEWorkspace+Lin.m in Sources */ = {isa = PBXBuildFile; fileRef = AADEADB917C872A5001E0C65 /* IDEWorkspace+Lin.m */; };
 		AADEADC017C87392001E0C65 /* MethodSwizzle.m in Sources */ = {isa = PBXBuildFile; fileRef = AADEADBF17C87392001E0C65 /* MethodSwizzle.m */; };
 		AAF0D6AB17ECB87100B4318B /* LNTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = AAF0D6AA17ECB87100B4318B /* LNTableView.m */; };
 		AAF0D6AE17ECB89800B4318B /* LNTableHeaderCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AAF0D6AD17ECB89800B4318B /* LNTableHeaderCell.m */; };
@@ -64,7 +71,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		AA02CE8A17EE08240041C2BD /* AlertAccessoryView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AlertAccessoryView.xib; sourceTree = "<group>"; };
+		AA02CE8A17EE08240041C2BD /* LNAlertAccessoryView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LNAlertAccessoryView.xib; sourceTree = "<group>"; };
 		AA02CE8C17EE083A0041C2BD /* LNAlertAccessoryView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LNAlertAccessoryView.h; sourceTree = "<group>"; };
 		AA02CE8D17EE083A0041C2BD /* LNAlertAccessoryView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LNAlertAccessoryView.m; sourceTree = "<group>"; };
 		AA11AC4017C66F0200889DFB /* DVTFilePath.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DVTFilePath.h; sourceTree = "<group>"; };
@@ -85,7 +92,6 @@
 		AA20D88017ECB1AD006B7CA2 /* NSPopoverFrame.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NSPopoverFrame.h; sourceTree = "<group>"; };
 		AA2980B217EE2C5300CF46E3 /* LNUserDefaultsManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LNUserDefaultsManager.h; sourceTree = "<group>"; };
 		AA2980B317EE2C5300CF46E3 /* LNUserDefaultsManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LNUserDefaultsManager.m; sourceTree = "<group>"; };
-		AA31DF3818C5C07E00AAA101 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		AA36376417D9EF9E003C5E55 /* LNPopoverContentView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LNPopoverContentView.h; sourceTree = "<group>"; };
 		AA36376517D9EF9E003C5E55 /* LNPopoverContentView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LNPopoverContentView.m; sourceTree = "<group>"; };
 		AA3EC36D17EB2A290003A180 /* DVTFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = DVTFoundation.framework; path = ../../../../Applications/Xcode.app/Contents/SharedFrameworks/DVTFoundation.framework; sourceTree = "<group>"; };
@@ -102,6 +108,16 @@
 		AA470D6A17C3D380005CBB7F /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		AA470D6E17C3D380005CBB7F /* LinTests-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "LinTests-Prefix.pch"; sourceTree = "<group>"; };
 		AA470D7C17C3DE31005CBB7F /* LNDetectorTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LNDetectorTests.m; sourceTree = "<group>"; };
+		AA6377CC18C5CCFC005EADC7 /* LNImageButtonCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LNImageButtonCell.h; sourceTree = "<group>"; };
+		AA6377CD18C5CCFC005EADC7 /* LNImageButtonCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LNImageButtonCell.m; sourceTree = "<group>"; };
+		AA63897118C6019A0061C2C4 /* icon_plus@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_plus@2x.png"; sourceTree = "<group>"; };
+		AA63897218C6019A0061C2C4 /* icon_minus.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon_minus.png; sourceTree = "<group>"; };
+		AA63897318C6019A0061C2C4 /* icon_minus@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_minus@2x.png"; sourceTree = "<group>"; };
+		AA63897418C6019A0061C2C4 /* icon120.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon120.png; sourceTree = "<group>"; };
+		AA63897518C6019A0061C2C4 /* icon_plus.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon_plus.png; sourceTree = "<group>"; };
+		AA63897618C6019A0061C2C4 /* icon_detach@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_detach@2x.png"; sourceTree = "<group>"; };
+		AA63897718C6019A0061C2C4 /* icon120@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon120@2x.png"; sourceTree = "<group>"; };
+		AA63897818C6019A0061C2C4 /* icon_detach.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon_detach.png; sourceTree = "<group>"; };
 		AA7B0CAD17F4228E0004FE3B /* DVTDualProxyWindow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DVTDualProxyWindow.h; sourceTree = "<group>"; };
 		AA7B0CB017F4229D0004FE3B /* IDEWorkspaceWindow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IDEWorkspaceWindow.h; sourceTree = "<group>"; };
 		AA7B0CB317F422BB0004FE3B /* DVTSourceTextView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DVTSourceTextView.h; sourceTree = "<group>"; };
@@ -112,7 +128,7 @@
 		AA8F8EEE17EDFC68004964FB /* NSTableView+editedColumnIdentifier.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSTableView+editedColumnIdentifier.h"; sourceTree = "<group>"; };
 		AA8F8EEF17EDFC68004964FB /* NSTableView+editedColumnIdentifier.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSTableView+editedColumnIdentifier.m"; sourceTree = "<group>"; };
 		AA93691517C4E4C000E94318 /* IDEWorkspace.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IDEWorkspace.h; sourceTree = "<group>"; };
-		AA95FDEB17EB48A9007D33D4 /* PopoverContentView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PopoverContentView.xib; sourceTree = "<group>"; };
+		AA95FDEB17EB48A9007D33D4 /* LNPopoverContentView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LNPopoverContentView.xib; sourceTree = "<group>"; };
 		AA95FDED17EB4E77007D33D4 /* LNPopoverWindowController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LNPopoverWindowController.h; sourceTree = "<group>"; };
 		AA95FDEE17EB4E77007D33D4 /* LNPopoverWindowController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LNPopoverWindowController.m; sourceTree = "<group>"; };
 		AAAC873117ED9D4F00BF251D /* LNHorizontalLine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LNHorizontalLine.h; sourceTree = "<group>"; };
@@ -130,8 +146,6 @@
 		AADEADB217C7B6D3001E0C65 /* LNLocalizationTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LNLocalizationTests.m; sourceTree = "<group>"; };
 		AADEADB517C87298001E0C65 /* IDEIndex+Lin.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "IDEIndex+Lin.h"; sourceTree = "<group>"; };
 		AADEADB617C87298001E0C65 /* IDEIndex+Lin.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "IDEIndex+Lin.m"; sourceTree = "<group>"; };
-		AADEADB817C872A5001E0C65 /* IDEWorkspace+Lin.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "IDEWorkspace+Lin.h"; sourceTree = "<group>"; };
-		AADEADB917C872A5001E0C65 /* IDEWorkspace+Lin.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "IDEWorkspace+Lin.m"; sourceTree = "<group>"; };
 		AADEADBB17C872EB001E0C65 /* IDEEditorDocument.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IDEEditorDocument.h; sourceTree = "<group>"; };
 		AADEADBE17C87392001E0C65 /* MethodSwizzle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MethodSwizzle.h; sourceTree = "<group>"; };
 		AADEADBF17C87392001E0C65 /* MethodSwizzle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MethodSwizzle.m; sourceTree = "<group>"; };
@@ -299,6 +313,21 @@
 			name = Models;
 			sourceTree = "<group>";
 		};
+		AA63898118C6019F0061C2C4 /* Images */ = {
+			isa = PBXGroup;
+			children = (
+				AA63897118C6019A0061C2C4 /* icon_plus@2x.png */,
+				AA63897518C6019A0061C2C4 /* icon_plus.png */,
+				AA63897218C6019A0061C2C4 /* icon_minus.png */,
+				AA63897318C6019A0061C2C4 /* icon_minus@2x.png */,
+				AA63897618C6019A0061C2C4 /* icon_detach@2x.png */,
+				AA63897818C6019A0061C2C4 /* icon_detach.png */,
+				AA63897718C6019A0061C2C4 /* icon120@2x.png */,
+				AA63897418C6019A0061C2C4 /* icon120.png */,
+			);
+			name = Images;
+			sourceTree = "<group>";
+		};
 		AA93691817C4E4C700E94318 /* Xcode-Private-Classes */ = {
 			isa = PBXGroup;
 			children = (
@@ -332,8 +361,6 @@
 				AADDDA9317C49D4800BBA67C /* NSBundle+versions.m */,
 				AADEADB517C87298001E0C65 /* IDEIndex+Lin.h */,
 				AADEADB617C87298001E0C65 /* IDEIndex+Lin.m */,
-				AADEADB817C872A5001E0C65 /* IDEWorkspace+Lin.h */,
-				AADEADB917C872A5001E0C65 /* IDEWorkspace+Lin.m */,
 				AA20D87D17ECB12A006B7CA2 /* NSPopoverFrame+Lin.h */,
 				AA20D87E17ECB12A006B7CA2 /* NSPopoverFrame+Lin.m */,
 				AA8F8EEE17EDFC68004964FB /* NSTableView+editedColumnIdentifier.h */,
@@ -345,9 +372,9 @@
 		AADDDA9B17C4A0DA00BBA67C /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				AA95FDEB17EB48A9007D33D4 /* PopoverContentView.xib */,
-				AA02CE8A17EE08240041C2BD /* AlertAccessoryView.xib */,
-				AA31DF3818C5C07E00AAA101 /* Images.xcassets */,
+				AA95FDEB17EB48A9007D33D4 /* LNPopoverContentView.xib */,
+				AA02CE8A17EE08240041C2BD /* LNAlertAccessoryView.xib */,
+				AA63898118C6019F0061C2C4 /* Images */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -380,6 +407,8 @@
 				AAAC873217ED9D4F00BF251D /* LNHorizontalLine.m */,
 				AA02CE8C17EE083A0041C2BD /* LNAlertAccessoryView.h */,
 				AA02CE8D17EE083A0041C2BD /* LNAlertAccessoryView.m */,
+				AA6377CC18C5CCFC005EADC7 /* LNImageButtonCell.h */,
+				AA6377CD18C5CCFC005EADC7 /* LNImageButtonCell.m */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -467,10 +496,17 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				AA95FDEC17EB48A9007D33D4 /* PopoverContentView.xib in Resources */,
-				AA02CE8B17EE08240041C2BD /* AlertAccessoryView.xib in Resources */,
+				AA63897B18C6019A0061C2C4 /* icon_minus@2x.png in Resources */,
+				AA63897F18C6019A0061C2C4 /* icon120@2x.png in Resources */,
+				AA63898018C6019A0061C2C4 /* icon_detach.png in Resources */,
+				AA63897A18C6019A0061C2C4 /* icon_minus.png in Resources */,
+				AA95FDEC17EB48A9007D33D4 /* LNPopoverContentView.xib in Resources */,
+				AA63897C18C6019A0061C2C4 /* icon120.png in Resources */,
+				AA63897D18C6019A0061C2C4 /* icon_plus.png in Resources */,
+				AA63897E18C6019A0061C2C4 /* icon_detach@2x.png in Resources */,
+				AA63897918C6019A0061C2C4 /* icon_plus@2x.png in Resources */,
+				AA02CE8B17EE08240041C2BD /* LNAlertAccessoryView.xib in Resources */,
 				AA1B7DB117C3C1EC00A3A6D7 /* InfoPlist.strings in Resources */,
-				AA31DF3918C5C07E00AAA101 /* Images.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -497,6 +533,7 @@
 				AADDDA9417C49D4800BBA67C /* NSBundle+versions.m in Sources */,
 				AAAC873B17EDA9CF00BF251D /* LNPopoverWindow.m in Sources */,
 				AA8F8EF017EDFC68004964FB /* NSTableView+editedColumnIdentifier.m in Sources */,
+				AA6377CE18C5CCFC005EADC7 /* LNImageButtonCell.m in Sources */,
 				AA20D87F17ECB12A006B7CA2 /* NSPopoverFrame+Lin.m in Sources */,
 				AA02CE8E17EE083A0041C2BD /* LNAlertAccessoryView.m in Sources */,
 				AA36376617D9EF9E003C5E55 /* LNPopoverContentView.m in Sources */,
@@ -506,7 +543,6 @@
 				AA1B7DBA17C3C20F00A3A6D7 /* Lin.m in Sources */,
 				AAF0D6AE17ECB89800B4318B /* LNTableHeaderCell.m in Sources */,
 				AAAC873317ED9D4F00BF251D /* LNHorizontalLine.m in Sources */,
-				AADEADBA17C872A5001E0C65 /* IDEWorkspace+Lin.m in Sources */,
 				AADEADB717C87298001E0C65 /* IDEIndex+Lin.m in Sources */,
 				AAF0D6AB17ECB87100B4318B /* LNTableView.m in Sources */,
 				AA2980B417EE2C5300CF46E3 /* LNUserDefaultsManager.m in Sources */,

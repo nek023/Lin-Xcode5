@@ -11,9 +11,6 @@
 // Categories
 #import "NSTableView+editedColumnIdentifier.h"
 
-// Shared
-#import "Lin.h"
-
 // Models
 #import "LNLocalizationCollection.h"
 #import "LNLocalization.h"
@@ -157,8 +154,8 @@ NSString * const LNPopoverContentViewDetachButtonDidClickNotification = @"LNPopo
 - (IBAction)addLocalization:(id)sender
 {
     // Create alert
-    NSViewController *viewController = [[NSViewController alloc] initWithNibName:@"AlertAccessoryView"
-                                                                          bundle:[[Lin sharedPlugIn] bundle]];
+    NSBundle *bundle = [NSBundle bundleForClass:[self class]];
+    NSViewController *viewController = [[NSViewController alloc] initWithNibName:@"LNAlertAccessoryView" bundle:bundle];
     LNAlertAccessoryView *accessoryView = (LNAlertAccessoryView *)viewController.view;
     accessoryView.collections = self.collections;
     
@@ -173,12 +170,7 @@ NSString * const LNPopoverContentViewDetachButtonDidClickNotification = @"LNPopo
     accessoryView.button = button;
     
     // Set icon
-    NSString *filePath;
-    if ([[NSScreen mainScreen] backingScaleFactor] == 2.0) {
-        filePath = [[[Lin sharedPlugIn] bundle] pathForResource:@"icon120@2x" ofType:@"png"];
-    } else {
-        filePath = [[[Lin sharedPlugIn] bundle] pathForResource:@"icon120" ofType:@"png"];
-    }
+    NSString *filePath = [bundle pathForResource:@"icon120" ofType:@"tiff"];
     NSImage *icon = [[NSImage alloc] initWithContentsOfFile:filePath];
     [alert setIcon:icon];
     
