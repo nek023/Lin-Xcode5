@@ -560,9 +560,6 @@ static Lin *_sharedPlugin = nil;
         for (DVTFilePath *filePath in indexCollection) {
             NSString *pathString = filePath.pathString;
             
-            NSLog(@"pathString: %@", pathString);
-            [NSThread sleepForTimeInterval:0.001];
-            
             BOOL parseStringsFilesOutsideWorkspaceProject = YES;
             if (parseStringsFilesOutsideWorkspaceProject ||
                 (!parseStringsFilesOutsideWorkspaceProject && [pathString rangeOfString:projectRootPath].location != NSNotFound)) {
