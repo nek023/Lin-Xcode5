@@ -71,19 +71,15 @@
 - (NSString *)loadContentsOfFile:(NSString *)filePath
 {
 	NSError *error = nil;
-    NSString *contents = [NSString stringWithContentsOfFile:self.filePath
-                                                   encoding:NSUTF8StringEncoding
-                                                      error:&error];
+    NSStringEncoding encoding = NSUTF8StringEncoding;
+    NSString *contents = [NSString stringWithContentsOfURL:[NSURL fileURLWithPath:self.filePath]
+                                              usedEncoding:&encoding
+                                                     error:&error];
     
     if (error) {
-        error = nil;
-        contents = [NSString stringWithContentsOfFile:self.filePath
-                                             encoding:NSUTF16StringEncoding
-                                                error:&error];
+        NSLog(@"Error: %@", [error localizedDescription]);
         
-        if (error) {
-            NSLog(@"Error: %@", [error localizedDescription]);
-        }
+        return nil;
     }
     
     return contents;
@@ -91,70 +87,71 @@
 
 - (void)reloadLocalizations
 {
-    NSMutableSet *localizations = [NSMutableSet set];
-    
     // Load contents
     NSString *contents = [self loadContentsOfFile:self.filePath];
     
-    // Parse
-    __block NSInteger lineOffset = 0;
-    __block NSString *key;
-    __block NSString *value;
-    __block NSRange entityRange;
-    __block NSRange keyRange;
-    __block NSRange valueRange;
-    
-    NSRegularExpression *regularExpression = [NSRegularExpression regularExpressionWithPattern:@"(\"(\\S+.*\\S+)\"|(\\S+.*\\S+))\\s*=\\s*\"(.*)\";$"
-                                                                                       options:0
-                                                                                         error:NULL];
-    
-    [contents enumerateLinesUsingBlock:^(NSString *line, BOOL *stop) {
-        key = nil;
-        value = nil;
-        keyRange = NSMakeRange(NSNotFound, 0);
-        valueRange = NSMakeRange(NSNotFound, 0);
+    if (contents) {
+        NSMutableSet *localizations = [NSMutableSet set];
         
-        [regularExpression enumerateMatchesInString:line
-                                            options:0
-                                              range:NSMakeRange(0, line.length)
-                                         usingBlock:^(NSTextCheckingResult *result, NSMatchingFlags flags, BOOL *stop) {
-                                             if (result.numberOfRanges == 5) {
-                                                 entityRange = [result rangeAtIndex:0];
-                                                 entityRange.location += lineOffset;
-                                                 
-                                                 keyRange = [result rangeAtIndex:2];
-                                                 if (keyRange.location == NSNotFound) keyRange = [result rangeAtIndex:3];
-                                                 
-                                                 valueRange = [result rangeAtIndex:4];
-                                                 
-                                                 key = [line substringWithRange:keyRange];
-                                                 value = [line substringWithRange:valueRange];
-                                                 
-                                                 keyRange.location += lineOffset;
-                                                 valueRange.location += lineOffset;
-                                             }
-                                             
-                                             *stop = YES;
-                                         }];
+        // Parse
+        __block NSInteger lineOffset = 0;
+        __block NSString *key;
+        __block NSString *value;
+        __block NSRange entityRange;
+        __block NSRange keyRange;
+        __block NSRange valueRange;
         
-        // Create localization
-        if (key != nil && value != nil) {
-            LNLocalization *localization = [LNLocalization localizationWithKey:key
-                                                                         value:value
-                                                                   entityRange:entityRange
-                                                                      keyRange:keyRange
-                                                                    valueRange:valueRange
-                                                                    collection:self];
+        NSRegularExpression *regularExpression = [NSRegularExpression regularExpressionWithPattern:@"(\"(\\S+.*\\S+)\"|(\\S+.*\\S+))\\s*=\\s*\"(.*)\";$"
+                                                                                           options:0
+                                                                                             error:NULL];
+        
+        [contents enumerateLinesUsingBlock:^(NSString *line, BOOL *stop) {
+            key = nil;
+            value = nil;
+            keyRange = NSMakeRange(NSNotFound, 0);
+            valueRange = NSMakeRange(NSNotFound, 0);
             
-            [localizations addObject:localization];
-        }
+            NSTextCheckingResult *result = [regularExpression firstMatchInString:line
+                                                                         options:0
+                                                                           range:NSMakeRange(0, line.length)];
+            
+            if (result.range.location != NSNotFound && result.numberOfRanges == 5) {
+                entityRange = [result rangeAtIndex:0];
+                entityRange.location += lineOffset;
+                
+                keyRange = [result rangeAtIndex:2];
+                if (keyRange.location == NSNotFound) keyRange = [result rangeAtIndex:3];
+                
+                valueRange = [result rangeAtIndex:4];
+                
+                key = [line substringWithRange:keyRange];
+                value = [line substringWithRange:valueRange];
+                
+                keyRange.location += lineOffset;
+                valueRange.location += lineOffset;
+            }
+            
+            // Create localization
+            if (key != nil && value != nil) {
+                LNLocalization *localization = [LNLocalization localizationWithKey:key
+                                                                             value:value
+                                                                       entityRange:entityRange
+                                                                          keyRange:keyRange
+                                                                        valueRange:valueRange
+                                                                        collection:self];
+                
+                [localizations addObject:localization];
+            }
+            
+            // Move offset
+            NSRange lineRange = [contents lineRangeForRange:NSMakeRange(lineOffset, 0)];
+            lineOffset += lineRange.length;
+        }];
         
-        // Move offset
-        NSRange lineRange = [contents lineRangeForRange:NSMakeRange(lineOffset, 0)];
-        lineOffset += lineRange.length;
-    }];
-    
-    self.localizations = localizations;
+        self.localizations = localizations;
+    } else {
+        self.localizations = nil;
+    }
 }
 
 - (void)addLocalization:(LNLocalization *)localization
