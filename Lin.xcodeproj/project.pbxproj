@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		AA02CE8B17EE08240041C2BD /* AlertAccessoryView.xib in Resources */ = {isa = PBXBuildFile; fileRef = AA02CE8A17EE08240041C2BD /* AlertAccessoryView.xib */; };
+		AA02CE8B17EE08240041C2BD /* LNAlertAccessoryView.xib in Resources */ = {isa = PBXBuildFile; fileRef = AA02CE8A17EE08240041C2BD /* LNAlertAccessoryView.xib */; };
 		AA02CE8E17EE083A0041C2BD /* LNAlertAccessoryView.m in Sources */ = {isa = PBXBuildFile; fileRef = AA02CE8D17EE083A0041C2BD /* LNAlertAccessoryView.m */; };
 		AA1B7DA717C3C1EC00A3A6D7 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AA1B7DA617C3C1EC00A3A6D7 /* Cocoa.framework */; };
 		AA1B7DB117C3C1EC00A3A6D7 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = AA1B7DAF17C3C1EC00A3A6D7 /* InfoPlist.strings */; };
@@ -36,7 +36,7 @@
 		AA7D4DB117C74CFE0092DF8A /* LNLocalizationCollection.m in Sources */ = {isa = PBXBuildFile; fileRef = AA7D4DB017C74CFE0092DF8A /* LNLocalizationCollection.m */; };
 		AA7D4DB417C74D0A0092DF8A /* LNLocalization.m in Sources */ = {isa = PBXBuildFile; fileRef = AA7D4DB317C74D0A0092DF8A /* LNLocalization.m */; };
 		AA8F8EF017EDFC68004964FB /* NSTableView+editedColumnIdentifier.m in Sources */ = {isa = PBXBuildFile; fileRef = AA8F8EEF17EDFC68004964FB /* NSTableView+editedColumnIdentifier.m */; };
-		AA95FDEC17EB48A9007D33D4 /* PopoverContentView.xib in Resources */ = {isa = PBXBuildFile; fileRef = AA95FDEB17EB48A9007D33D4 /* PopoverContentView.xib */; };
+		AA95FDEC17EB48A9007D33D4 /* LNPopoverContentView.xib in Resources */ = {isa = PBXBuildFile; fileRef = AA95FDEB17EB48A9007D33D4 /* LNPopoverContentView.xib */; };
 		AA95FDEF17EB4E77007D33D4 /* LNPopoverWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = AA95FDEE17EB4E77007D33D4 /* LNPopoverWindowController.m */; };
 		AAAC873317ED9D4F00BF251D /* LNHorizontalLine.m in Sources */ = {isa = PBXBuildFile; fileRef = AAAC873217ED9D4F00BF251D /* LNHorizontalLine.m */; };
 		AAAC873B17EDA9CF00BF251D /* LNPopoverWindow.m in Sources */ = {isa = PBXBuildFile; fileRef = AAAC873A17EDA9CF00BF251D /* LNPopoverWindow.m */; };
@@ -71,7 +71,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		AA02CE8A17EE08240041C2BD /* AlertAccessoryView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AlertAccessoryView.xib; sourceTree = "<group>"; };
+		AA02CE8A17EE08240041C2BD /* LNAlertAccessoryView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LNAlertAccessoryView.xib; sourceTree = "<group>"; };
 		AA02CE8C17EE083A0041C2BD /* LNAlertAccessoryView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LNAlertAccessoryView.h; sourceTree = "<group>"; };
 		AA02CE8D17EE083A0041C2BD /* LNAlertAccessoryView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LNAlertAccessoryView.m; sourceTree = "<group>"; };
 		AA11AC4017C66F0200889DFB /* DVTFilePath.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DVTFilePath.h; sourceTree = "<group>"; };
@@ -128,7 +128,7 @@
 		AA8F8EEE17EDFC68004964FB /* NSTableView+editedColumnIdentifier.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSTableView+editedColumnIdentifier.h"; sourceTree = "<group>"; };
 		AA8F8EEF17EDFC68004964FB /* NSTableView+editedColumnIdentifier.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSTableView+editedColumnIdentifier.m"; sourceTree = "<group>"; };
 		AA93691517C4E4C000E94318 /* IDEWorkspace.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IDEWorkspace.h; sourceTree = "<group>"; };
-		AA95FDEB17EB48A9007D33D4 /* PopoverContentView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PopoverContentView.xib; sourceTree = "<group>"; };
+		AA95FDEB17EB48A9007D33D4 /* LNPopoverContentView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LNPopoverContentView.xib; sourceTree = "<group>"; };
 		AA95FDED17EB4E77007D33D4 /* LNPopoverWindowController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LNPopoverWindowController.h; sourceTree = "<group>"; };
 		AA95FDEE17EB4E77007D33D4 /* LNPopoverWindowController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LNPopoverWindowController.m; sourceTree = "<group>"; };
 		AAAC873117ED9D4F00BF251D /* LNHorizontalLine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LNHorizontalLine.h; sourceTree = "<group>"; };
@@ -372,8 +372,8 @@
 		AADDDA9B17C4A0DA00BBA67C /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				AA95FDEB17EB48A9007D33D4 /* PopoverContentView.xib */,
-				AA02CE8A17EE08240041C2BD /* AlertAccessoryView.xib */,
+				AA95FDEB17EB48A9007D33D4 /* LNPopoverContentView.xib */,
+				AA02CE8A17EE08240041C2BD /* LNAlertAccessoryView.xib */,
 				AA63898118C6019F0061C2C4 /* Images */,
 			);
 			name = Resources;
@@ -500,12 +500,12 @@
 				AA63897F18C6019A0061C2C4 /* icon120@2x.png in Resources */,
 				AA63898018C6019A0061C2C4 /* icon_detach.png in Resources */,
 				AA63897A18C6019A0061C2C4 /* icon_minus.png in Resources */,
-				AA95FDEC17EB48A9007D33D4 /* PopoverContentView.xib in Resources */,
+				AA95FDEC17EB48A9007D33D4 /* LNPopoverContentView.xib in Resources */,
 				AA63897C18C6019A0061C2C4 /* icon120.png in Resources */,
 				AA63897D18C6019A0061C2C4 /* icon_plus.png in Resources */,
 				AA63897E18C6019A0061C2C4 /* icon_detach@2x.png in Resources */,
 				AA63897918C6019A0061C2C4 /* icon_plus@2x.png in Resources */,
-				AA02CE8B17EE08240041C2BD /* AlertAccessoryView.xib in Resources */,
+				AA02CE8B17EE08240041C2BD /* LNAlertAccessoryView.xib in Resources */,
 				AA1B7DB117C3C1EC00A3A6D7 /* InfoPlist.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

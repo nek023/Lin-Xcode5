@@ -131,7 +131,7 @@ static Lin *_sharedPlugin = nil;
         
         // Show the version information
         NSBundle *bundle = [NSBundle bundleForClass:[self class]];
-        NSLog(@"Lin v%@ was successfully loaded.", [bundle shortVersionString]);
+        NSLog(@"Lin ver.%@ was successfully loaded.", [bundle shortVersionString]);
         
         // Activate if enabled
         if ([[LNUserDefaultsManager sharedManager] isEnabled]) {
@@ -145,7 +145,7 @@ static Lin *_sharedPlugin = nil;
 - (void)instantiatePopover
 {
     NSBundle *bundle = [NSBundle bundleForClass:[self class]];
-    NSViewController *contentViewController = [[NSViewController alloc] initWithNibName:@"PopoverContentView" bundle:bundle];
+    NSViewController *contentViewController = [[NSViewController alloc] initWithNibName:@"LNPopoverContentView" bundle:bundle];
     
     NSPopover *popover = [[NSPopover alloc] init];
     popover.delegate = self;
@@ -160,7 +160,7 @@ static Lin *_sharedPlugin = nil;
 - (void)instantiatePopoverWindowController
 {
     NSBundle *bundle = [NSBundle bundleForClass:[self class]];
-    NSViewController *contentViewController = [[NSViewController alloc] initWithNibName:@"PopoverContentView" bundle:bundle];
+    NSViewController *contentViewController = [[NSViewController alloc] initWithNibName:@"LNPopoverContentView" bundle:bundle];
     LNPopoverContentView *contentView = (LNPopoverContentView *)contentViewController.view;
     [contentView.detachButton setHidden:YES];
     
@@ -359,7 +359,7 @@ static Lin *_sharedPlugin = nil;
 }
 
 
-#pragma mark - Detachig the Popover
+#pragma mark - Detachig Popover
 
 - (void)preparePopoverWindow
 {

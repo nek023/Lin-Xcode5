@@ -155,7 +155,7 @@ NSString * const LNPopoverContentViewDetachButtonDidClickNotification = @"LNPopo
 {
     // Create alert
     NSBundle *bundle = [NSBundle bundleForClass:[self class]];
-    NSViewController *viewController = [[NSViewController alloc] initWithNibName:@"AlertAccessoryView" bundle:bundle];
+    NSViewController *viewController = [[NSViewController alloc] initWithNibName:@"LNAlertAccessoryView" bundle:bundle];
     LNAlertAccessoryView *accessoryView = (LNAlertAccessoryView *)viewController.view;
     accessoryView.collections = self.collections;
     
