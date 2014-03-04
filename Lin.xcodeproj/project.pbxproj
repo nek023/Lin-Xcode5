@@ -44,7 +44,6 @@
 		AADEADB317C7B6D3001E0C65 /* LNLocalizationTests.m in Sources */ = {isa = PBXBuildFile; fileRef = AADEADB217C7B6D3001E0C65 /* LNLocalizationTests.m */; };
 		AADEADB417C7B838001E0C65 /* LNLocalization.m in Sources */ = {isa = PBXBuildFile; fileRef = AA7D4DB317C74D0A0092DF8A /* LNLocalization.m */; };
 		AADEADB717C87298001E0C65 /* IDEIndex+Lin.m in Sources */ = {isa = PBXBuildFile; fileRef = AADEADB617C87298001E0C65 /* IDEIndex+Lin.m */; };
-		AADEADBA17C872A5001E0C65 /* IDEWorkspace+Lin.m in Sources */ = {isa = PBXBuildFile; fileRef = AADEADB917C872A5001E0C65 /* IDEWorkspace+Lin.m */; };
 		AADEADC017C87392001E0C65 /* MethodSwizzle.m in Sources */ = {isa = PBXBuildFile; fileRef = AADEADBF17C87392001E0C65 /* MethodSwizzle.m */; };
 		AAF0D6AB17ECB87100B4318B /* LNTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = AAF0D6AA17ECB87100B4318B /* LNTableView.m */; };
 		AAF0D6AE17ECB89800B4318B /* LNTableHeaderCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AAF0D6AD17ECB89800B4318B /* LNTableHeaderCell.m */; };
@@ -133,8 +132,6 @@
 		AADEADB217C7B6D3001E0C65 /* LNLocalizationTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LNLocalizationTests.m; sourceTree = "<group>"; };
 		AADEADB517C87298001E0C65 /* IDEIndex+Lin.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "IDEIndex+Lin.h"; sourceTree = "<group>"; };
 		AADEADB617C87298001E0C65 /* IDEIndex+Lin.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "IDEIndex+Lin.m"; sourceTree = "<group>"; };
-		AADEADB817C872A5001E0C65 /* IDEWorkspace+Lin.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "IDEWorkspace+Lin.h"; sourceTree = "<group>"; };
-		AADEADB917C872A5001E0C65 /* IDEWorkspace+Lin.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "IDEWorkspace+Lin.m"; sourceTree = "<group>"; };
 		AADEADBB17C872EB001E0C65 /* IDEEditorDocument.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IDEEditorDocument.h; sourceTree = "<group>"; };
 		AADEADBE17C87392001E0C65 /* MethodSwizzle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MethodSwizzle.h; sourceTree = "<group>"; };
 		AADEADBF17C87392001E0C65 /* MethodSwizzle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MethodSwizzle.m; sourceTree = "<group>"; };
@@ -335,8 +332,6 @@
 				AADDDA9317C49D4800BBA67C /* NSBundle+versions.m */,
 				AADEADB517C87298001E0C65 /* IDEIndex+Lin.h */,
 				AADEADB617C87298001E0C65 /* IDEIndex+Lin.m */,
-				AADEADB817C872A5001E0C65 /* IDEWorkspace+Lin.h */,
-				AADEADB917C872A5001E0C65 /* IDEWorkspace+Lin.m */,
 				AA20D87D17ECB12A006B7CA2 /* NSPopoverFrame+Lin.h */,
 				AA20D87E17ECB12A006B7CA2 /* NSPopoverFrame+Lin.m */,
 				AA8F8EEE17EDFC68004964FB /* NSTableView+editedColumnIdentifier.h */,
@@ -512,7 +507,6 @@
 				AA1B7DBA17C3C20F00A3A6D7 /* Lin.m in Sources */,
 				AAF0D6AE17ECB89800B4318B /* LNTableHeaderCell.m in Sources */,
 				AAAC873317ED9D4F00BF251D /* LNHorizontalLine.m in Sources */,
-				AADEADBA17C872A5001E0C65 /* IDEWorkspace+Lin.m in Sources */,
 				AADEADB717C87298001E0C65 /* IDEIndex+Lin.m in Sources */,
 				AAF0D6AB17ECB87100B4318B /* LNTableView.m in Sources */,
 				AA2980B417EE2C5300CF46E3 /* LNUserDefaultsManager.m in Sources */,
