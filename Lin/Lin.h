@@ -12,12 +12,8 @@
 
 @interface Lin : NSObject <NSPopoverDelegate>
 
-@property (nonatomic, strong, readonly) NSBundle *bundle;
-
 + (void)pluginDidLoad:(NSBundle *)bundle;
 + (instancetype)sharedPlugIn;
-
-- (instancetype)initWithBundle:(NSBundle *)bundle;
 
 - (void)indexNeedsUpdate:(IDEIndex *)index;
 - (void)removeLocalizationsForIndex:(IDEIndex *)index;

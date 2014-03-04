@@ -131,7 +131,7 @@
                                     <constraint firstAttribute="width" constant="23" id="vGo-Tv-NV0"/>
                                 </constraints>
                                 <buttonCell key="cell" type="bevel" bezelStyle="rounded" image="icon_plus" imagePosition="overlaps" alignment="center" imageScaling="proportionallyDown" inset="2" id="Vfs-qd-LwL" customClass="LNImageButtonCell">
-                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                    <behavior key="behavior" lightByContents="YES"/>
                                     <font key="font" metaFont="system"/>
                                 </buttonCell>
                                 <connections>
@@ -146,7 +146,7 @@
                                     <constraint firstAttribute="height" constant="23" id="D5h-qU-aRQ"/>
                                 </constraints>
                                 <buttonCell key="cell" type="bevel" bezelStyle="rounded" image="icon_minus" imagePosition="overlaps" alignment="center" imageScaling="proportionallyDown" inset="2" id="jgd-uF-zMf" customClass="LNImageButtonCell">
-                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                    <behavior key="behavior" lightByContents="YES"/>
                                     <font key="font" metaFont="system"/>
                                 </buttonCell>
                                 <connections>
@@ -161,7 +161,7 @@
                                     <constraint firstAttribute="width" constant="23" id="PsO-Ia-HA2"/>
                                 </constraints>
                                 <buttonCell key="cell" type="bevel" bezelStyle="rounded" image="icon_detach" imagePosition="overlaps" alignment="center" imageScaling="proportionallyDown" inset="2" id="VUs-dt-MMw" customClass="LNImageButtonCell">
-                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                    <behavior key="behavior" lightByContents="YES"/>
                                     <font key="font" metaFont="system"/>
                                 </buttonCell>
                                 <connections>
