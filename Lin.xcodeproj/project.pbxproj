@@ -25,6 +25,7 @@
 		AA470D6517C3D380005CBB7F /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AA470D6417C3D380005CBB7F /* XCTest.framework */; };
 		AA470D6B17C3D380005CBB7F /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = AA470D6917C3D380005CBB7F /* InfoPlist.strings */; };
 		AA470D7D17C3DE31005CBB7F /* LNDetectorTests.m in Sources */ = {isa = PBXBuildFile; fileRef = AA470D7C17C3DE31005CBB7F /* LNDetectorTests.m */; };
+		AA6377CE18C5CCFC005EADC7 /* LNImageButtonCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AA6377CD18C5CCFC005EADC7 /* LNImageButtonCell.m */; };
 		AA7D4DB117C74CFE0092DF8A /* LNLocalizationCollection.m in Sources */ = {isa = PBXBuildFile; fileRef = AA7D4DB017C74CFE0092DF8A /* LNLocalizationCollection.m */; };
 		AA7D4DB417C74D0A0092DF8A /* LNLocalization.m in Sources */ = {isa = PBXBuildFile; fileRef = AA7D4DB317C74D0A0092DF8A /* LNLocalization.m */; };
 		AA8F8EF017EDFC68004964FB /* NSTableView+editedColumnIdentifier.m in Sources */ = {isa = PBXBuildFile; fileRef = AA8F8EEF17EDFC68004964FB /* NSTableView+editedColumnIdentifier.m */; };
@@ -102,6 +103,8 @@
 		AA470D6A17C3D380005CBB7F /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		AA470D6E17C3D380005CBB7F /* LinTests-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "LinTests-Prefix.pch"; sourceTree = "<group>"; };
 		AA470D7C17C3DE31005CBB7F /* LNDetectorTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LNDetectorTests.m; sourceTree = "<group>"; };
+		AA6377CC18C5CCFC005EADC7 /* LNImageButtonCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LNImageButtonCell.h; sourceTree = "<group>"; };
+		AA6377CD18C5CCFC005EADC7 /* LNImageButtonCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LNImageButtonCell.m; sourceTree = "<group>"; };
 		AA7B0CAD17F4228E0004FE3B /* DVTDualProxyWindow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DVTDualProxyWindow.h; sourceTree = "<group>"; };
 		AA7B0CB017F4229D0004FE3B /* IDEWorkspaceWindow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IDEWorkspaceWindow.h; sourceTree = "<group>"; };
 		AA7B0CB317F422BB0004FE3B /* DVTSourceTextView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DVTSourceTextView.h; sourceTree = "<group>"; };
@@ -380,6 +383,8 @@
 				AAAC873217ED9D4F00BF251D /* LNHorizontalLine.m */,
 				AA02CE8C17EE083A0041C2BD /* LNAlertAccessoryView.h */,
 				AA02CE8D17EE083A0041C2BD /* LNAlertAccessoryView.m */,
+				AA6377CC18C5CCFC005EADC7 /* LNImageButtonCell.h */,
+				AA6377CD18C5CCFC005EADC7 /* LNImageButtonCell.m */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -497,6 +502,7 @@
 				AADDDA9417C49D4800BBA67C /* NSBundle+versions.m in Sources */,
 				AAAC873B17EDA9CF00BF251D /* LNPopoverWindow.m in Sources */,
 				AA8F8EF017EDFC68004964FB /* NSTableView+editedColumnIdentifier.m in Sources */,
+				AA6377CE18C5CCFC005EADC7 /* LNImageButtonCell.m in Sources */,
 				AA20D87F17ECB12A006B7CA2 /* NSPopoverFrame+Lin.m in Sources */,
 				AA02CE8E17EE083A0041C2BD /* LNAlertAccessoryView.m in Sources */,
 				AA36376617D9EF9E003C5E55 /* LNPopoverContentView.m in Sources */,
