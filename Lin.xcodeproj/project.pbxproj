@@ -12,9 +12,9 @@
 		AA1B7DA717C3C1EC00A3A6D7 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AA1B7DA617C3C1EC00A3A6D7 /* Cocoa.framework */; };
 		AA1B7DB117C3C1EC00A3A6D7 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = AA1B7DAF17C3C1EC00A3A6D7 /* InfoPlist.strings */; };
 		AA1B7DBA17C3C20F00A3A6D7 /* Lin.m in Sources */ = {isa = PBXBuildFile; fileRef = AA1B7DB917C3C20F00A3A6D7 /* Lin.m */; };
-		AA20D87617ECA62B006B7CA2 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AA20D87517ECA62B006B7CA2 /* Images.xcassets */; };
 		AA20D87F17ECB12A006B7CA2 /* NSPopoverFrame+Lin.m in Sources */ = {isa = PBXBuildFile; fileRef = AA20D87E17ECB12A006B7CA2 /* NSPopoverFrame+Lin.m */; };
 		AA2980B417EE2C5300CF46E3 /* LNUserDefaultsManager.m in Sources */ = {isa = PBXBuildFile; fileRef = AA2980B317EE2C5300CF46E3 /* LNUserDefaultsManager.m */; };
+		AA31DF3918C5C07E00AAA101 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AA31DF3818C5C07E00AAA101 /* Images.xcassets */; };
 		AA36376617D9EF9E003C5E55 /* LNPopoverContentView.m in Sources */ = {isa = PBXBuildFile; fileRef = AA36376517D9EF9E003C5E55 /* LNPopoverContentView.m */; };
 		AA3EC36F17EB2A290003A180 /* DVTFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AA3EC36D17EB2A290003A180 /* DVTFoundation.framework */; };
 		AA3EC37017EB2A290003A180 /* DVTKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AA3EC36E17EB2A290003A180 /* DVTKit.framework */; };
@@ -80,12 +80,12 @@
 		AA1B7DB217C3C1EC00A3A6D7 /* Lin-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Lin-Prefix.pch"; sourceTree = "<group>"; };
 		AA1B7DB817C3C20F00A3A6D7 /* Lin.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Lin.h; sourceTree = "<group>"; };
 		AA1B7DB917C3C20F00A3A6D7 /* Lin.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Lin.m; sourceTree = "<group>"; };
-		AA20D87517ECA62B006B7CA2 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		AA20D87D17ECB12A006B7CA2 /* NSPopoverFrame+Lin.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSPopoverFrame+Lin.h"; sourceTree = "<group>"; };
 		AA20D87E17ECB12A006B7CA2 /* NSPopoverFrame+Lin.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSPopoverFrame+Lin.m"; sourceTree = "<group>"; };
 		AA20D88017ECB1AD006B7CA2 /* NSPopoverFrame.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NSPopoverFrame.h; sourceTree = "<group>"; };
 		AA2980B217EE2C5300CF46E3 /* LNUserDefaultsManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LNUserDefaultsManager.h; sourceTree = "<group>"; };
 		AA2980B317EE2C5300CF46E3 /* LNUserDefaultsManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LNUserDefaultsManager.m; sourceTree = "<group>"; };
+		AA31DF3818C5C07E00AAA101 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		AA36376417D9EF9E003C5E55 /* LNPopoverContentView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LNPopoverContentView.h; sourceTree = "<group>"; };
 		AA36376517D9EF9E003C5E55 /* LNPopoverContentView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LNPopoverContentView.m; sourceTree = "<group>"; };
 		AA3EC36D17EB2A290003A180 /* DVTFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = DVTFoundation.framework; path = ../../../../Applications/Xcode.app/Contents/SharedFrameworks/DVTFoundation.framework; sourceTree = "<group>"; };
@@ -345,9 +345,9 @@
 		AADDDA9B17C4A0DA00BBA67C /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				AA20D87517ECA62B006B7CA2 /* Images.xcassets */,
 				AA95FDEB17EB48A9007D33D4 /* PopoverContentView.xib */,
 				AA02CE8A17EE08240041C2BD /* AlertAccessoryView.xib */,
+				AA31DF3818C5C07E00AAA101 /* Images.xcassets */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -467,10 +467,10 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				AA20D87617ECA62B006B7CA2 /* Images.xcassets in Resources */,
 				AA95FDEC17EB48A9007D33D4 /* PopoverContentView.xib in Resources */,
 				AA02CE8B17EE08240041C2BD /* AlertAccessoryView.xib in Resources */,
 				AA1B7DB117C3C1EC00A3A6D7 /* InfoPlist.strings in Resources */,
+				AA31DF3918C5C07E00AAA101 /* Images.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
