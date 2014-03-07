@@ -98,7 +98,7 @@ static Lin *_sharedPlugin = nil;
                                                      name:NSWindowDidBecomeMainNotification
                                                    object:nil];
         [[NSNotificationCenter defaultCenter] addObserver:self
-                                                 selector:@selector(indexDidChangeState:)
+                                                 selector:@selector(indexDidIndexWorkspace:)
                                                      name:@"IDEIndexDidIndexWorkspaceNotification"
                                                    object:nil];
         [[NSNotificationCenter defaultCenter] addObserver:self
@@ -179,7 +179,7 @@ static Lin *_sharedPlugin = nil;
                                                     name:NSWindowDidBecomeMainNotification
                                                   object:nil];
     [[NSNotificationCenter defaultCenter] removeObserver:self
-                                                    name:@"IDEIndexDidChangeStateNotification"
+                                                    name:@"IDEIndexDidIndexWorkspaceNotification"
                                                   object:nil];
     [[NSNotificationCenter defaultCenter] removeObserver:self
                                                     name:@"IDEEditorDocumentDidSaveNotification"
@@ -288,7 +288,7 @@ static Lin *_sharedPlugin = nil;
     }
 }
 
-- (void)indexDidChangeState:(NSNotification *)notification
+- (void)indexDidIndexWorkspace:(NSNotification *)notification
 {
     IDEIndex *index = (IDEIndex *)[notification object];
     [self indexNeedsUpdate:index];
