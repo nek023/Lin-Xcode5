@@ -99,7 +99,7 @@ static Lin *_sharedPlugin = nil;
                                                    object:nil];
         [[NSNotificationCenter defaultCenter] addObserver:self
                                                  selector:@selector(indexDidChangeState:)
-                                                     name:@"IDEIndexDidChangeStateNotification"
+                                                     name:@"IDEIndexDidIndexWorkspaceNotification"
                                                    object:nil];
         [[NSNotificationCenter defaultCenter] addObserver:self
                                                  selector:@selector(editorDocumentDidSave:)
