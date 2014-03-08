@@ -545,33 +545,38 @@ static Lin *_sharedPlugin = nil;
         NSString *projectRootPath = [[workspaceFilePath stringByDeletingLastPathComponent] stringByDeletingLastPathComponent];
         
         // Find .strings files
-        IDEIndexCollection *indexCollection = [index filesContaining:@".strings" anchorStart:NO anchorEnd:NO subsequence:NO ignoreCase:YES cancelWhen:nil];
-        NSMutableArray *collections = [NSMutableArray array];
-        
-        for (DVTFilePath *filePath in indexCollection) {
-            NSString *pathString = filePath.pathString;
+        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), ^{
             
-            BOOL parseStringsFilesOutsideWorkspaceProject = YES;
-            if (parseStringsFilesOutsideWorkspaceProject ||
-                (!parseStringsFilesOutsideWorkspaceProject && [pathString rangeOfString:projectRootPath].location != NSNotFound)) {
-                // Create localization collection
-                LNLocalizationCollection *collection = [LNLocalizationCollection localizationCollectionWithContentsOfFile:pathString];
-                [collections addObject:collection];
+            IDEIndexCollection *indexCollection = [index filesContaining:@".strings" anchorStart:NO anchorEnd:NO subsequence:NO ignoreCase:YES cancelWhen:nil];
+            NSMutableArray *collections = [NSMutableArray array];
+            
+            for (DVTFilePath *filePath in indexCollection) {
+                NSString *pathString = filePath.pathString;
+                
+                BOOL parseStringsFilesOutsideWorkspaceProject = YES;
+                if (parseStringsFilesOutsideWorkspaceProject ||
+                    (!parseStringsFilesOutsideWorkspaceProject && [pathString rangeOfString:projectRootPath].location != NSNotFound)) {
+                    // Create localization collection
+                    LNLocalizationCollection *collection = [LNLocalizationCollection localizationCollectionWithContentsOfFile:pathString];
+                    [collections addObject:collection];
+                }
             }
-        }
+            
+            [self.workspaceLocalizations setObject:collections forKey:workspaceFilePath];
+            dispatch_async(dispatch_get_main_queue(), ^{
+                // Update popover content if current workspace's files changed
+                if ([workspaceFilePath isEqualToString:self.currentWorkspaceFilePath]) {
+                    if ([self.popover isShown]) {
+                        LNPopoverContentView *contentView = (LNPopoverContentView *)self.popover.contentViewController.view;
+                        contentView.collections = collections;
+                    } else if ([self.popoverWindowController.window isVisible]) {
+                        LNPopoverContentView *contentView = (LNPopoverContentView *)self.popoverWindowController.contentViewController.view;
+                        contentView.collections = collections;
+                    }
+                }
+            });
+        });
         
-        [self.workspaceLocalizations setObject:collections forKey:workspaceFilePath];
-        
-        // Update popover content if current workspace's files changed
-        if ([workspaceFilePath isEqualToString:self.currentWorkspaceFilePath]) {
-            if ([self.popover isShown]) {
-                LNPopoverContentView *contentView = (LNPopoverContentView *)self.popover.contentViewController.view;
-                contentView.collections = collections;
-            } else if ([self.popoverWindowController.window isVisible]) {
-                LNPopoverContentView *contentView = (LNPopoverContentView *)self.popoverWindowController.contentViewController.view;
-                contentView.collections = collections;
-            }
-        }
     }
 }
 
