@@ -58,6 +58,7 @@
 		AAF0D6B417ECD8EC00B4318B /* LNButtonCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AAF0D6B317ECD8EC00B4318B /* LNButtonCell.m */; };
 		AAFE3C3F17EECF4A0018E478 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = AAFE3C3E17EECF4A0018E478 /* Localizable.strings */; };
 		AAFE3C4117EED36C0018E478 /* LNLocalizationCollection.m in Sources */ = {isa = PBXBuildFile; fileRef = AA7D4DB017C74CFE0092DF8A /* LNLocalizationCollection.m */; };
+		F5859DBD18CABC2A009AF108 /* LNLocalizedStringCollectionOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = F5859DBC18CABC2A009AF108 /* LNLocalizedStringCollectionOperation.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -158,6 +159,8 @@
 		AAF0D6B217ECD8EC00B4318B /* LNButtonCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LNButtonCell.h; sourceTree = "<group>"; };
 		AAF0D6B317ECD8EC00B4318B /* LNButtonCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LNButtonCell.m; sourceTree = "<group>"; };
 		AAFE3C3E17EECF4A0018E478 /* Localizable.strings */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; path = Localizable.strings; sourceTree = "<group>"; };
+		F5859DBB18CABC2A009AF108 /* LNLocalizedStringCollectionOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LNLocalizedStringCollectionOperation.h; sourceTree = "<group>"; };
+		F5859DBC18CABC2A009AF108 /* LNLocalizedStringCollectionOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LNLocalizedStringCollectionOperation.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -268,6 +271,8 @@
 			children = (
 				AA2980B217EE2C5300CF46E3 /* LNUserDefaultsManager.h */,
 				AA2980B317EE2C5300CF46E3 /* LNUserDefaultsManager.m */,
+				F5859DBB18CABC2A009AF108 /* LNLocalizedStringCollectionOperation.h */,
+				F5859DBC18CABC2A009AF108 /* LNLocalizedStringCollectionOperation.m */,
 			);
 			name = Shared;
 			sourceTree = "<group>";
@@ -548,6 +553,7 @@
 				AA2980B417EE2C5300CF46E3 /* LNUserDefaultsManager.m in Sources */,
 				AA95FDEF17EB4E77007D33D4 /* LNPopoverWindowController.m in Sources */,
 				AADEADC017C87392001E0C65 /* MethodSwizzle.m in Sources */,
+				F5859DBD18CABC2A009AF108 /* LNLocalizedStringCollectionOperation.m in Sources */,
 				AA470D5B17C3CFEC005CBB7F /* LNDetector.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
