@@ -34,6 +34,7 @@
 
 // Controllers
 #import "LNPopoverWindowController.h"
+#import "LNLocalizedStringCollectionOperation.h"
 
 static Lin *_sharedPlugin = nil;
 
@@ -58,6 +59,7 @@ static Lin *_sharedPlugin = nil;
 
 @property (nonatomic, strong) NSMenuItem *enableMenuItem;
 @property (nonatomic, strong) NSMenuItem *showWindowMenuItem;
+@property (nonatomic, strong) NSOperationQueue *collectionProcessQueue;
 
 @end
 
@@ -137,6 +139,9 @@ static Lin *_sharedPlugin = nil;
         if ([[LNUserDefaultsManager sharedManager] isEnabled]) {
             [self activate];
         }
+        
+        self.collectionProcessQueue = [[NSOperationQueue alloc] init];
+        self.collectionProcessQueue.maxConcurrentOperationCount = 1;
     }
     
     return self;
@@ -301,7 +306,7 @@ static Lin *_sharedPlugin = nil;
     NSString *pathString = filePath.pathString;
     
     // Check whether there are any changes to .strings
-    NSMutableArray *collections = [self.workspaceLocalizations objectForKey:self.currentWorkspaceFilePath];
+    NSArray *collections = [self.workspaceLocalizations objectForKey:self.currentWorkspaceFilePath];
     
     for (LNLocalizationCollection *collection in collections) {
         if ([collection.filePath isEqualToString:pathString]) {
@@ -531,38 +536,16 @@ static Lin *_sharedPlugin = nil;
     NSString *workspaceFilePath = workspaceFile.pathString;
     
     if (workspaceFilePath) {
+        [self.collectionProcessQueue cancelAllOperations];
         [self updateLocalizationsForIndex:index];
     }
 }
 
 - (void)updateLocalizationsForIndex:(IDEIndex *)index
 {
-    IDEWorkspace *workspace = [index valueForKey:@"_workspace"];
-    DVTFilePath *representingFilePath = workspace.representingFilePath;
-    NSString *workspaceFilePath = representingFilePath.pathString;
-    
-    if (workspaceFilePath) {
-        NSString *projectRootPath = [[workspaceFilePath stringByDeletingLastPathComponent] stringByDeletingLastPathComponent];
-        
-        // Find .strings files
-        IDEIndexCollection *indexCollection = [index filesContaining:@".strings" anchorStart:NO anchorEnd:NO subsequence:NO ignoreCase:YES cancelWhen:nil];
-        NSMutableArray *collections = [NSMutableArray array];
-        
-        for (DVTFilePath *filePath in indexCollection) {
-            NSString *pathString = filePath.pathString;
-            
-            BOOL parseStringsFilesOutsideWorkspaceProject = YES;
-            if (parseStringsFilesOutsideWorkspaceProject ||
-                (!parseStringsFilesOutsideWorkspaceProject && [pathString rangeOfString:projectRootPath].location != NSNotFound)) {
-                // Create localization collection
-                LNLocalizationCollection *collection = [LNLocalizationCollection localizationCollectionWithContentsOfFile:pathString];
-                [collections addObject:collection];
-            }
-        }
-        
+    LNLocalizedStringCollectionOperation *processOperation = [[LNLocalizedStringCollectionOperation alloc] initWithIndex:index];
+    processOperation.collectionCompletedBlock = ^(NSString *workspaceFilePath, NSArray *collections) {
         [self.workspaceLocalizations setObject:collections forKey:workspaceFilePath];
-        
-        // Update popover content if current workspace's files changed
         if ([workspaceFilePath isEqualToString:self.currentWorkspaceFilePath]) {
             if ([self.popover isShown]) {
                 LNPopoverContentView *contentView = (LNPopoverContentView *)self.popover.contentViewController.view;
@@ -572,7 +555,9 @@ static Lin *_sharedPlugin = nil;
                 contentView.collections = collections;
             }
         }
-    }
+    };
+    
+    [self.collectionProcessQueue addOperation:processOperation];
 }
 
 - (void)removeLocalizationsForIndex:(IDEIndex *)index
