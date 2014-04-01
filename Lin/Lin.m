@@ -131,10 +131,6 @@ static Lin *_sharedPlugin = nil;
                                                      name:NSMenuDidChangeItemNotification
                                                    object:nil];
         
-        // Show the version information
-        NSBundle *bundle = [NSBundle bundleForClass:[self class]];
-        NSLog(@"Lin ver.%@ was successfully loaded.", [bundle shortVersionString]);
-        
         // Activate if enabled
         if ([[LNUserDefaultsManager sharedManager] isEnabled]) {
             [self activate];
