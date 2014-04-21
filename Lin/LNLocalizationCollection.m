@@ -101,7 +101,7 @@
         __block NSRange keyRange;
         __block NSRange valueRange;
         
-        NSRegularExpression *regularExpression = [NSRegularExpression regularExpressionWithPattern:@"(\"(\\S+.*\\S+)\"|(\\S+.*\\S+))\\s*=\\s*\"(.*)\";$"
+        NSRegularExpression *regularExpression = [NSRegularExpression regularExpressionWithPattern:@"(\"(\\S+.*\\S+)\"|(\\S+.*\\S+))\\s*=\\s*\"(.*)\";(.*)$"
                                                                                            options:0
                                                                                              error:NULL];
         
@@ -115,7 +115,7 @@
                                                                          options:0
                                                                            range:NSMakeRange(0, line.length)];
             
-            if (result.range.location != NSNotFound && result.numberOfRanges == 5) {
+            if (result.range.location != NSNotFound && result.numberOfRanges >= 5) {
                 entityRange = [result rangeAtIndex:0];
                 entityRange.location += lineOffset;
                 
