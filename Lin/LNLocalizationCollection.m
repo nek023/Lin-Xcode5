@@ -93,59 +93,24 @@
     if (contents) {
         NSMutableSet *localizations = [NSMutableSet set];
         
-        // Parse
-        __block NSInteger lineOffset = 0;
-        __block NSString *key;
-        __block NSString *value;
-        __block NSRange entityRange;
-        __block NSRange keyRange;
-        __block NSRange valueRange;
-        
-        NSRegularExpression *regularExpression = [NSRegularExpression regularExpressionWithPattern:@"(\"(\\S+.*\\S+)\"|(\\S+.*\\S+))\\s*=\\s*\"(.*)\";$"
+        NSRegularExpression *regularExpression = [NSRegularExpression regularExpressionWithPattern:
+                                                  @"(?#key   )(?:\"(.*)\"|(\\S+))"
+                                                  @"(?#equals)\\s*=\\s*"
+                                                  @"(?#value )\"(.*)\";"
                                                                                            options:0
-                                                                                             error:NULL];
+                                                                                             error:nil];
         
-        [contents enumerateLinesUsingBlock:^(NSString *line, BOOL *stop) {
-            key = nil;
-            value = nil;
-            keyRange = NSMakeRange(NSNotFound, 0);
-            valueRange = NSMakeRange(NSNotFound, 0);
+        [regularExpression enumerateMatchesInString:contents options:0 range:NSMakeRange(0, [contents length]) usingBlock:^(NSTextCheckingResult *result, NSMatchingFlags flags, BOOL *stop) {
+            NSRange entityRange = [result rangeAtIndex:0];
+            NSRange keyRange    = [result rangeAtIndex:1].location != NSNotFound ? [result rangeAtIndex:1] : [result rangeAtIndex:2];
+            NSRange valueRange  = [result rangeAtIndex:3];
             
-            NSTextCheckingResult *result = [regularExpression firstMatchInString:line
-                                                                         options:0
-                                                                           range:NSMakeRange(0, line.length)];
-            
-            if (result.range.location != NSNotFound && result.numberOfRanges == 5) {
-                entityRange = [result rangeAtIndex:0];
-                entityRange.location += lineOffset;
-                
-                keyRange = [result rangeAtIndex:2];
-                if (keyRange.location == NSNotFound) keyRange = [result rangeAtIndex:3];
-                
-                valueRange = [result rangeAtIndex:4];
-                
-                key = [line substringWithRange:keyRange];
-                value = [line substringWithRange:valueRange];
-                
-                keyRange.location += lineOffset;
-                valueRange.location += lineOffset;
-            }
-            
-            // Create localization
-            if (key != nil && value != nil) {
-                LNLocalization *localization = [LNLocalization localizationWithKey:key
-                                                                             value:value
-                                                                       entityRange:entityRange
-                                                                          keyRange:keyRange
-                                                                        valueRange:valueRange
-                                                                        collection:self];
-                
-                [localizations addObject:localization];
-            }
-            
-            // Move offset
-            NSRange lineRange = [contents lineRangeForRange:NSMakeRange(lineOffset, 0)];
-            lineOffset += lineRange.length;
+            [localizations addObject:[LNLocalization localizationWithKey:[contents substringWithRange:keyRange]
+                                                                   value:[contents substringWithRange:valueRange]
+                                                             entityRange:entityRange
+                                                                keyRange:keyRange
+                                                              valueRange:valueRange
+                                                              collection:self]];
         }];
         
         self.localizations = localizations;
