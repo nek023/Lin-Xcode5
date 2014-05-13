@@ -121,9 +121,11 @@ NSString * const LNPopoverContentViewDetachButtonDidClickNotification = @"LNPopo
         
         LNLocalization *newLocalization = [LNLocalization localizationWithKey:key
                                                                         value:value
+                                                                      comment:nil
                                                                   entityRange:localization.entityRange
                                                                      keyRange:localization.keyRange
                                                                    valueRange:localization.valueRange
+                                                                 commentRange:NSMakeRange(NSNotFound, 0)
                                                                    collection:localization.collection];
         
         // Replace in file
@@ -187,9 +189,11 @@ NSString * const LNPopoverContentViewDetachButtonDidClickNotification = @"LNPopo
             
             LNLocalization *localization = [LNLocalization localizationWithKey:key
                                                                          value:value
+                                                                       comment:nil
                                                                    entityRange:NSMakeRange(NSNotFound, 0)
                                                                       keyRange:NSMakeRange(NSNotFound, 0)
                                                                     valueRange:NSMakeRange(NSNotFound, 0)
+                                                                  commentRange:NSMakeRange(NSNotFound, 0)
                                                                     collection:collection];
             
             // Add localization to file
@@ -308,6 +312,9 @@ NSString * const LNPopoverContentViewDetachButtonDidClickNotification = @"LNPopo
     }
     else if ([identifier isEqualToString:@"value"]) {
         return localization.value;
+    }
+    else if ([identifier isEqualToString:@"comment"]) {
+        return localization.comment;
     }
     
     return nil;

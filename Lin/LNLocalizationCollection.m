@@ -93,23 +93,44 @@
     if (contents) {
         NSMutableSet *localizations = [NSMutableSet set];
         
+        // to keep it simple for now comments are only accepted if
+        //   * the comment is C-style
+        //   * the comment is on the line above the key-value
+        //   * the comment is followed by no whitespace except one new line
+        //   * the key-value line is not prefixed with any whitespace
+        // this can be changed later on when time allows :)
+        // example found below:        
+        //               v - no whitespace here except newline
+        // /* Comment */
+        // @"key" = @"value";
+        // ^ - no whitespace here
+        
         NSRegularExpression *regularExpression = [NSRegularExpression regularExpressionWithPattern:
-                                                  @"(?#key   )(?:\"(.*)\"|(\\S+))"
-                                                  @"(?#equals)\\s*=\\s*"
-                                                  @"(?#value )\"(.*)\";"
+                                                  @"(?#comment)(?:/\\*(.*)\\*/\n)?"
+                                                  @"(?#key    )(?:\"(.*)\"|(\\S+))"
+                                                  @"(?#equals )\\s*=\\s*"
+                                                  @"(?#value  )\"(.*)\";"
                                                                                            options:0
                                                                                              error:nil];
         
         [regularExpression enumerateMatchesInString:contents options:0 range:NSMakeRange(0, [contents length]) usingBlock:^(NSTextCheckingResult *result, NSMatchingFlags flags, BOOL *stop) {
-            NSRange entityRange = [result rangeAtIndex:0];
-            NSRange keyRange    = [result rangeAtIndex:1].location != NSNotFound ? [result rangeAtIndex:1] : [result rangeAtIndex:2];
-            NSRange valueRange  = [result rangeAtIndex:3];
+            NSString *comment = nil;
+            
+            NSRange entityRange  = [result rangeAtIndex:0];
+            NSRange commentRange = [result rangeAtIndex:1];
+            NSRange keyRange     = [result rangeAtIndex:2].location != NSNotFound ? [result rangeAtIndex:2] : [result rangeAtIndex:3];
+            NSRange valueRange   = [result rangeAtIndex:4];
+            
+            if (commentRange.location != NSNotFound)
+                comment = [contents substringWithRange:commentRange];
             
             [localizations addObject:[LNLocalization localizationWithKey:[contents substringWithRange:keyRange]
                                                                    value:[contents substringWithRange:valueRange]
+                                                                 comment:comment
                                                              entityRange:entityRange
                                                                 keyRange:keyRange
                                                               valueRange:valueRange
+                                                            commentRange:commentRange
                                                               collection:self]];
         }];
         
@@ -128,6 +149,10 @@
     if (![contents hasSuffix:@"\n"]) {
         contents = [contents stringByAppendingString:@"\n"];
     }
+    
+    // Add comment
+    if (localization.comment)
+        contents = [contents stringByAppendingFormat:@"/*%@*/\n", localization.comment];
     
     contents = [contents stringByAppendingFormat:@"\"%@\" = \"%@\";\n", localization.key, localization.value];
     
@@ -171,6 +196,11 @@
     
     // Replace
     NSString *newEntity = [NSString stringWithFormat:@"\"%@\" = \"%@\";", newLocalization.key, newLocalization.value];
+
+    // Add comment
+    if (localization.comment)
+        newEntity = [NSString stringWithFormat:@"/*%@*/\n%@", localization.comment, newEntity];
+
     contents = [contents stringByReplacingCharactersInRange:localization.entityRange withString:newEntity];
     
     // Override

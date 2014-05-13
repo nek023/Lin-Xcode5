@@ -14,15 +14,17 @@
 
 @property (nonatomic, copy, readonly) NSString *key;
 @property (nonatomic, copy, readonly) NSString *value;
+@property (nonatomic, copy, readonly) NSString *comment;
 
 @property (nonatomic, assign, readonly) NSRange entityRange;
 @property (nonatomic, assign, readonly) NSRange keyRange;
 @property (nonatomic, assign, readonly) NSRange valueRange;
+@property (nonatomic, assign, readonly) NSRange commentRange;
 
 @property (nonatomic, weak, readonly) LNLocalizationCollection *collection;
 
-+ (instancetype)localizationWithKey:(NSString *)key value:(NSString *)value entityRange:(NSRange)entityRange keyRange:(NSRange)keyRange valueRange:(NSRange)valueRange collection:(LNLocalizationCollection *)collection;
++ (instancetype)localizationWithKey:(NSString *)key value:(NSString *)value comment:(NSString *)comment entityRange:(NSRange)entityRange keyRange:(NSRange)keyRange valueRange:(NSRange)valueRange commentRange:(NSRange)commentRange collection:(LNLocalizationCollection *)collection;
 
-- (instancetype)initWithKey:(NSString *)key value:(NSString *)value entityRange:(NSRange)entityRange keyRange:(NSRange)keyRange valueRange:(NSRange)valueRange collection:(LNLocalizationCollection *)collection;
+- (instancetype)initWithKey:(NSString *)key value:(NSString *)value comment:(NSString *)comment entityRange:(NSRange)entityRange keyRange:(NSRange)keyRange valueRange:(NSRange)valueRange commentRange:(NSRange)commentRange collection:(LNLocalizationCollection *)collection;
 
 @end
