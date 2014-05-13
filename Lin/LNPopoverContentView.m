@@ -110,6 +110,7 @@ NSString * const LNPopoverContentViewDetachButtonDidClickNotification = @"LNPopo
         
         NSString *key = localization.key;
         NSString *value = localization.value;
+        NSString *comment = localization.comment;
         
         NSString *columnIdentifier = [self.tableView editedColumnIdentifier];
         
@@ -117,15 +118,27 @@ NSString * const LNPopoverContentViewDetachButtonDidClickNotification = @"LNPopo
             key = textView.textStorage.string;
         } else if ([columnIdentifier isEqualToString:@"value"]) {
             value = textView.textStorage.string;
+        } else if ([columnIdentifier isEqualToString:@"comment"]) {
+            comment = textView.textStorage.string;
+            if ([comment length] == 0)
+                comment = nil; // no comment added
+            else {
+                // prefix comment with space if needed
+                if ([comment characterAtIndex:0] != ' ')
+                    comment = [NSString stringWithFormat:@" %@", comment ];
+                // postfix comment with space if needed
+                if ([comment characterAtIndex:[comment length] - 1] != ' ')
+                    comment = [NSString stringWithFormat:@"%@ ", comment ];
+            }
         }
-        
+    
         LNLocalization *newLocalization = [LNLocalization localizationWithKey:key
                                                                         value:value
-                                                                      comment:nil
+                                                                      comment:comment
                                                                   entityRange:localization.entityRange
                                                                      keyRange:localization.keyRange
                                                                    valueRange:localization.valueRange
-                                                                 commentRange:NSMakeRange(NSNotFound, 0)
+                                                                 commentRange:localization.commentRange
                                                                    collection:localization.collection];
         
         // Replace in file

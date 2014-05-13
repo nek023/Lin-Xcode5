@@ -198,8 +198,8 @@
     NSString *newEntity = [NSString stringWithFormat:@"\"%@\" = \"%@\";", newLocalization.key, newLocalization.value];
 
     // Add comment
-    if (localization.comment)
-        newEntity = [NSString stringWithFormat:@"/*%@*/\n%@", localization.comment, newEntity];
+    if (newLocalization.comment)
+        newEntity = [NSString stringWithFormat:@"/*%@*/\n%@", newLocalization.comment, newEntity];
 
     contents = [contents stringByReplacingCharactersInRange:localization.entityRange withString:newEntity];
     
