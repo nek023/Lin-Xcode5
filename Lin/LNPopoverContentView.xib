@@ -130,11 +130,11 @@
                     <color key="fillColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     <font key="titleFont" metaFont="system"/>
                 </box>
-                <box autoresizesSubviews="NO" misplaced="YES" boxType="custom" borderType="none" titlePosition="noTitle" translatesAutoresizingMaskIntoConstraints="NO" id="cAa-PZ-3Fm">
-                    <rect key="frame" x="0.0" y="0.0" width="500" height="25"/>
+                <box autoresizesSubviews="NO" boxType="custom" borderType="none" titlePosition="noTitle" translatesAutoresizingMaskIntoConstraints="NO" id="cAa-PZ-3Fm">
+                    <rect key="frame" x="0.0" y="0.0" width="700" height="25"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                     <view key="contentView">
-                        <rect key="frame" x="0.0" y="0.0" width="500" height="25"/>
+                        <rect key="frame" x="0.0" y="0.0" width="700" height="25"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button translatesAutoresizingMaskIntoConstraints="NO" id="WtB-AR-lfY">
@@ -167,8 +167,8 @@
                                     <action selector="deleteLocalization:" target="JhI-Tt-sI6" id="tFN-bB-EZ9"/>
                                 </connections>
                             </button>
-                            <button misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="X12-7a-tbY">
-                                <rect key="frame" x="473" y="1" width="23" height="23"/>
+                            <button translatesAutoresizingMaskIntoConstraints="NO" id="X12-7a-tbY">
+                                <rect key="frame" x="673" y="1" width="23" height="23"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="23" id="Fjw-Dz-IYH"/>

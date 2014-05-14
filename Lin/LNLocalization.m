@@ -17,7 +17,6 @@
 @property (nonatomic, assign, readwrite) NSRange entityRange;
 @property (nonatomic, assign, readwrite) NSRange keyRange;
 @property (nonatomic, assign, readwrite) NSRange valueRange;
-@property (nonatomic, assign, readwrite) NSRange commentRange;
 
 @property (nonatomic, weak, readwrite) LNLocalizationCollection *collection;
 
@@ -25,12 +24,12 @@
 
 @implementation LNLocalization
 
-+ (instancetype)localizationWithKey:(NSString *)key value:(NSString *)value comment:(NSString *)comment entityRange:(NSRange)entityRange keyRange:(NSRange)keyRange valueRange:(NSRange)valueRange commentRange:(NSRange)commentRange collection:(LNLocalizationCollection *)collection
++ (instancetype)localizationWithKey:(NSString *)key value:(NSString *)value comment:(NSString *)comment entityRange:(NSRange)entityRange keyRange:(NSRange)keyRange valueRange:(NSRange)valueRange collection:(LNLocalizationCollection *)collection
 {
-    return [[self alloc] initWithKey:key value:value comment:comment entityRange:(NSRange)entityRange keyRange:keyRange valueRange:valueRange commentRange:commentRange collection:collection];
+    return [[self alloc] initWithKey:key value:value comment:comment entityRange:(NSRange)entityRange keyRange:keyRange valueRange:valueRange collection:collection];
 }
 
-- (instancetype)initWithKey:(NSString *)key value:(NSString *)value comment:(NSString *)comment entityRange:(NSRange)entityRange keyRange:(NSRange)keyRange valueRange:(NSRange)valueRange commentRange:(NSRange)commentRange collection:(LNLocalizationCollection *)collection
+- (instancetype)initWithKey:(NSString *)key value:(NSString *)value comment:(NSString *)comment entityRange:(NSRange)entityRange keyRange:(NSRange)keyRange valueRange:(NSRange)valueRange collection:(LNLocalizationCollection *)collection
 {
     self = [super init];
     
@@ -42,7 +41,6 @@
         self.entityRange = entityRange;
         self.keyRange = keyRange;
         self.valueRange = valueRange;
-        self.commentRange = commentRange;
         
         self.collection = collection;
     }
@@ -70,7 +68,7 @@
 - (NSString *)description
 {
     return [NSString stringWithFormat:
-            @"<%@: %p; key = %@; value = %@; comment = %@; entityRange = %@; keyRange = %@; valueRange = %@; commentRange = %@; collection = %p>",
+            @"<%@: %p; key = %@; value = %@; comment = %@; entityRange = %@; keyRange = %@; valueRange = %@; collection = %p>",
             NSStringFromClass([self class]),
             self,
             self.key,
@@ -79,7 +77,6 @@
             NSStringFromRange(self.entityRange),
             NSStringFromRange(self.keyRange),
             NSStringFromRange(self.valueRange),
-            NSStringFromRange(self.commentRange),
             self.collection
             ];
 }

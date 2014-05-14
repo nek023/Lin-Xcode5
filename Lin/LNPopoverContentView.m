@@ -120,16 +120,6 @@ NSString * const LNPopoverContentViewDetachButtonDidClickNotification = @"LNPopo
             value = textView.textStorage.string;
         } else if ([columnIdentifier isEqualToString:@"comment"]) {
             comment = textView.textStorage.string;
-            if ([comment length] == 0)
-                comment = nil; // no comment added
-            else {
-                // prefix comment with space if needed
-                if ([comment characterAtIndex:0] != ' ')
-                    comment = [NSString stringWithFormat:@" %@", comment ];
-                // postfix comment with space if needed
-                if ([comment characterAtIndex:[comment length] - 1] != ' ')
-                    comment = [NSString stringWithFormat:@"%@ ", comment ];
-            }
         }
     
         LNLocalization *newLocalization = [LNLocalization localizationWithKey:key
@@ -138,7 +128,6 @@ NSString * const LNPopoverContentViewDetachButtonDidClickNotification = @"LNPopo
                                                                   entityRange:localization.entityRange
                                                                      keyRange:localization.keyRange
                                                                    valueRange:localization.valueRange
-                                                                 commentRange:localization.commentRange
                                                                    collection:localization.collection];
         
         // Replace in file
@@ -199,14 +188,14 @@ NSString * const LNPopoverContentViewDetachButtonDidClickNotification = @"LNPopo
             LNLocalizationCollection *collection = accessoryView.selectedCollection;
             NSString *key = accessoryView.inputtedKey;
             NSString *value = accessoryView.inputtedValue;
+            NSString *comment = accessoryView.inputtedComment;
             
             LNLocalization *localization = [LNLocalization localizationWithKey:key
                                                                          value:value
-                                                                       comment:nil
+                                                                       comment:comment
                                                                    entityRange:NSMakeRange(NSNotFound, 0)
                                                                       keyRange:NSMakeRange(NSNotFound, 0)
                                                                     valueRange:NSMakeRange(NSNotFound, 0)
-                                                                  commentRange:NSMakeRange(NSNotFound, 0)
                                                                     collection:collection];
             
             // Add localization to file

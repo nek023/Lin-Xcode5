@@ -130,13 +130,25 @@
                                                              entityRange:entityRange
                                                                 keyRange:keyRange
                                                               valueRange:valueRange
-                                                            commentRange:commentRange
                                                               collection:self]];
         }];
         
         self.localizations = localizations;
     } else {
         self.localizations = nil;
+    }
+}
+
+- (NSString *)formatComment:(NSString *)comment
+{
+    if (comment && [comment length] > 0) {
+        // if needed add spaces at the ends
+        NSString *prefix = [comment hasPrefix:@" "] ? @"" : @" ";
+        NSString *suffix = [comment hasSuffix:@" "] ? @"" : @" ";
+        
+        return [NSString stringWithFormat:@"/*%@%@%@*/\n", prefix, comment, suffix];
+    } else {
+        return @"";
     }
 }
 
@@ -150,11 +162,7 @@
         contents = [contents stringByAppendingString:@"\n"];
     }
     
-    // Add comment
-    if (localization.comment)
-        contents = [contents stringByAppendingFormat:@"/*%@*/\n", localization.comment];
-    
-    contents = [contents stringByAppendingFormat:@"\"%@\" = \"%@\";\n", localization.key, localization.value];
+    contents = [contents stringByAppendingFormat:@"\n%@\"%@\" = \"%@\";\n", [self formatComment:localization.comment], localization.key, localization.value];
     
     // Override
     NSError *error = nil;
@@ -195,11 +203,7 @@
     NSString *contents = [self loadContentsOfFile:self.filePath];
     
     // Replace
-    NSString *newEntity = [NSString stringWithFormat:@"\"%@\" = \"%@\";", newLocalization.key, newLocalization.value];
-
-    // Add comment
-    if (newLocalization.comment)
-        newEntity = [NSString stringWithFormat:@"/*%@*/\n%@", newLocalization.comment, newEntity];
+    NSString *newEntity = [NSString stringWithFormat:@"%@\"%@\" = \"%@\";", [self formatComment:newLocalization.comment], newLocalization.key, newLocalization.value];
 
     contents = [contents stringByReplacingCharactersInRange:localization.entityRange withString:newEntity];
     

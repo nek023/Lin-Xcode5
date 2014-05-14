@@ -71,7 +71,6 @@
                                                                entityRange:NSMakeRange(0, 0)
                                                                   keyRange:NSMakeRange(0, 0)
                                                                 valueRange:NSMakeRange(0, 0)
-                                                              commentRange:NSMakeRange(NSNotFound, 0)
                                                                 collection:nil];
         
         XCTAssertTrue([collection.localizations containsObject:localization]);
