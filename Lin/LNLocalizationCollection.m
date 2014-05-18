@@ -139,24 +139,40 @@
     }
 }
 
-- (NSString *)formatComment:(NSString *)comment
+- (NSString *)formatEntity:(LNLocalization *)localization
 {
-    if (comment && [comment length] > 0) {
-        // if needed add spaces at the ends
-        NSString *prefix = [comment hasPrefix:@" "] ? @"" : @" ";
-        NSString *suffix = [comment hasSuffix:@" "] ? @"" : @" ";
+    NSString *comment = @"";
+    
+    if (localization.comment && [localization.comment length] > 0) {
+        // Add spaces at the ends if needed
+        NSString *prefix = [localization.comment hasPrefix:@" "] ? @"" : @" ";
+        NSString *suffix = [localization.comment hasSuffix:@" "] ? @"" : @" ";
         
-        return [NSString stringWithFormat:@"/*%@%@%@*/\n", prefix, comment, suffix];
-    } else {
-        return @"";
+        comment = [NSString stringWithFormat:@"/*%@%@%@*/\n", prefix, localization.comment, suffix];
     }
+    
+    return [NSString stringWithFormat:@"%@\"%@\" = \"%@\";", comment, localization.key, localization.value];
+}
+
+- (void)writeContents:(NSString *)contents withRange:(NSRange)range replacedWithString:(NSString *)string
+{
+    // Override
+    NSError *error = nil;
+    [[contents stringByReplacingCharactersInRange:range withString:string] writeToFile:self.filePath atomically:NO encoding:NSUTF8StringEncoding error:&error];
+    
+    if (error) {
+        NSLog(@"Error: %@", [error localizedDescription]);
+    }
+
+    // Reload
+    [self reloadLocalizations];
 }
 
 - (void)addLocalization:(LNLocalization *)localization
 {
     // Load contents
     NSString *contents = [self loadContentsOfFile:self.filePath];
-    __block NSRange rangeToBeReplaced = NSMakeRange([contents length], 0);
+    __block NSRange range = NSMakeRange([contents length], 0); // Starting point if no trailing white space found
     
     NSRegularExpression *regularExpression = [NSRegularExpression regularExpressionWithPattern:
                                               @"(?#capture trailing whitespace)(\\s+)$"
@@ -164,66 +180,38 @@
                                                                                          error:nil];
     
     [regularExpression enumerateMatchesInString:contents options:0 range:NSMakeRange(0, [contents length]) usingBlock:^(NSTextCheckingResult *result, NSMatchingFlags flags, BOOL *stop) {
-        rangeToBeReplaced = [result rangeAtIndex:1];
+        range = [result rangeAtIndex:1];
     }];
     
-    NSString *newEntity = [NSString stringWithFormat:@"\n\n%@\"%@\" = \"%@\";\n", [self formatComment:localization.comment], localization.key, localization.value];
-   
-    contents = [contents stringByReplacingCharactersInRange:rangeToBeReplaced withString:newEntity];
-    
-    // Override
-    NSError *error = nil;
-    [contents writeToFile:self.filePath atomically:NO encoding:NSUTF8StringEncoding error:&error];
-    
-    if (error) {
-        NSLog(@"Error: %@", [error localizedDescription]);
-    }
-    
-    // Reload
-    [self reloadLocalizations];
+    [self writeContents:contents withRange:range replacedWithString:[NSString stringWithFormat:@"\n\n%@\n", [self formatEntity:localization]]];
 }
 
 - (void)deleteLocalization:(LNLocalization *)localization
 {
+    NSCharacterSet *whitespace = [NSCharacterSet whitespaceAndNewlineCharacterSet];
+    
     // Load contents
     NSString *contents = [self loadContentsOfFile:self.filePath];
     
-    // Delete line
-    NSRange lineRange = [contents lineRangeForRange:localization.entityRange];
-    contents = [contents stringByReplacingCharactersInRange:lineRange withString:@""];
+    NSRange range = localization.entityRange; // Starting point
     
-    // Override
-    NSError *error = nil;
-    [contents writeToFile:self.filePath atomically:NO encoding:NSUTF8StringEncoding error:&error];
-    
-    if (error) {
-        NSLog(@"Error: %@", [error localizedDescription]);
+    // Expand range left if whitespace is present
+    while (range.location > 0 && [whitespace characterIsMember:[contents characterAtIndex:range.location - 1]]) {
+        range.location--;
+        range.length++;
     }
     
-    // Reload
-    [self reloadLocalizations];
+    // Expand range right if whitespace is present
+    while (NSMaxRange(range) < [contents length] && [whitespace characterIsMember:[contents characterAtIndex:NSMaxRange(range)]]) {
+        range.length++;
+    }
+    
+    [self writeContents:[self loadContentsOfFile:self.filePath] withRange:range replacedWithString:@"\n\n"];
 }
 
 - (void)replaceLocalization:(LNLocalization *)localization withLocalization:(LNLocalization *)newLocalization
 {
-    // Load contents
-    NSString *contents = [self loadContentsOfFile:self.filePath];
-    
-    // Replace
-    NSString *newEntity = [NSString stringWithFormat:@"%@\"%@\" = \"%@\";", [self formatComment:newLocalization.comment], newLocalization.key, newLocalization.value];
-
-    contents = [contents stringByReplacingCharactersInRange:localization.entityRange withString:newEntity];
-    
-    // Override
-    NSError *error = nil;
-    [contents writeToFile:self.filePath atomically:NO encoding:NSUTF8StringEncoding error:&error];
-    
-    if (error) {
-        NSLog(@"Error: %@", [error localizedDescription]);
-    }
-    
-    // Reload
-    [self reloadLocalizations];
+    [self writeContents:[self loadContentsOfFile:self.filePath] withRange:localization.entityRange replacedWithString:[self formatEntity:newLocalization]];
 }
 
 @end
