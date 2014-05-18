@@ -156,13 +156,20 @@
 {
     // Load contents
     NSString *contents = [self loadContentsOfFile:self.filePath];
+    __block NSRange rangeToBeReplaced = NSMakeRange([contents length], 0);
     
-    // Add
-    if (![contents hasSuffix:@"\n"]) {
-        contents = [contents stringByAppendingString:@"\n"];
-    }
+    NSRegularExpression *regularExpression = [NSRegularExpression regularExpressionWithPattern:
+                                              @"(?#capture trailing whitespace)(\\s+)$"
+                                                                                       options:0
+                                                                                         error:nil];
     
-    contents = [contents stringByAppendingFormat:@"\n%@\"%@\" = \"%@\";\n", [self formatComment:localization.comment], localization.key, localization.value];
+    [regularExpression enumerateMatchesInString:contents options:0 range:NSMakeRange(0, [contents length]) usingBlock:^(NSTextCheckingResult *result, NSMatchingFlags flags, BOOL *stop) {
+        rangeToBeReplaced = [result rangeAtIndex:1];
+    }];
+    
+    NSString *newEntity = [NSString stringWithFormat:@"\n\n%@\"%@\" = \"%@\";\n", [self formatComment:localization.comment], localization.key, localization.value];
+   
+    contents = [contents stringByReplacingCharactersInRange:rangeToBeReplaced withString:newEntity];
     
     // Override
     NSError *error = nil;
