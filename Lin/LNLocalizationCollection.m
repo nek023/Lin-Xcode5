@@ -36,10 +36,7 @@
         
         // Extract language designation
         NSArray *pathComponents = [filePath pathComponents];
-        // The superdir is shown in parentheses to distinguish possible duplicate name-language combos
-        self.languageDesignation = [NSString stringWithFormat:@"%@ (%@)",
-                                    [[pathComponents objectAtIndex:pathComponents.count - 2] stringByDeletingPathExtension],
-                                    [pathComponents objectAtIndex:pathComponents.count - 3]];
+        self.languageDesignation = [[pathComponents objectAtIndex:pathComponents.count - 2] stringByDeletingPathExtension];
         
         // Update
         [self reloadLocalizations];
