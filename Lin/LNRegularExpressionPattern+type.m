@@ -63,6 +63,12 @@ static NSString * const LNRegularExpressionPatternTypePropertyKey = @"type";
             numberOfRanges = 6;
         }
             break;
+        case LNEntityTypeCustomLocalizedStringOnlyForKey:
+        {
+            pettern = @"LocalizedString\\s*\\(\\s*@\"(.*?)\"\\s*\\)";
+            numberOfRanges = 2;
+        }
+            break;
     }
     
     if (pettern) {

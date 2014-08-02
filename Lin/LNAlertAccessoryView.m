@@ -92,7 +92,17 @@
         [tableFileNames addObject:collection.fileName];
     }
     
-    [self.tableButton addItemsWithTitles:[tableFileNames allObjects]];
+    NSMutableArray * names = [[tableFileNames allObjects] mutableCopy];
+    [names enumerateObjectsUsingBlock:^(NSString *name, NSUInteger idx, BOOL *stop) {
+        
+        if ([name isEqualToString:@"Localizable.strings"])
+        {
+            [names exchangeObjectAtIndex:0 withObjectAtIndex:idx];
+            *stop = YES;
+        }
+    }];
+    
+    [self.tableButton addItemsWithTitles:names];
 }
 
 - (void)updateLanguages
