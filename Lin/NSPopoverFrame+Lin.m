@@ -15,7 +15,7 @@
 
 + (void)load
 {
-    MethodSwizzle(self, @selector(_drawMinimalPopoverAppearanceInRect:anchorEdge:anchorPoint:), @selector(jp_questbeat_lin_drawMinimalPopoverAppearanceInRect:anchorEdge:anchorPoint:));
+//    MethodSwizzle(self, @selector(_drawMinimalPopoverAppearanceInRect:anchorEdge:anchorPoint:), @selector(jp_questbeat_lin_drawMinimalPopoverAppearanceInRect:anchorEdge:anchorPoint:));
 }
 
 - (void)jp_questbeat_lin_drawMinimalPopoverAppearanceInRect:(struct CGRect)arg1 anchorEdge:(unsigned long long)arg2 anchorPoint:(struct CGPoint)arg3
