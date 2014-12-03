@@ -153,6 +153,7 @@ static Lin *_sharedPlugin = nil;
 - (void)instantiatePopoverWindowController {
     NSBundle *bundle = [NSBundle bundleForClass:[self class]];
     MainViewController *contentViewController = [[MainViewController alloc] initWithNibName:@"MainViewController" bundle:bundle];
+    NSLog(@"%@", contentViewController.view); // FIXME
     [contentViewController.detachButton setHidden:YES];
     
     LNPopoverWindowController *popoverWindowController = [[LNPopoverWindowController alloc] initWithContentViewController:contentViewController];

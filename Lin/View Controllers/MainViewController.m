@@ -8,9 +8,6 @@
 
 #import "MainViewController.h"
 
-// Categories
-#import "NSTableView+editedColumnIdentifier.h"
-
 // Models
 #import "LNLocalizationCollection.h"
 #import "LNLocalization.h"
@@ -46,85 +43,61 @@ static NSString * const EVOPopoverContentViewCellReuseIdentifier = @"EVOPopoverC
     [super viewDidLoad];
     
     // Set default sort order
-    NSSortDescriptor *sortDescriptor = [NSSortDescriptor sortDescriptorWithKey:@"key"
-                                                                     ascending:YES
-                                                                      selector:@selector(compare:)];
+    NSSortDescriptor *sortDescriptor = [NSSortDescriptor sortDescriptorWithKey:@"key" ascending:YES selector:@selector(compare:)];
     [self.tableView setSortDescriptors:@[sortDescriptor]];
     
-    // Register to notification center
-    [[NSNotificationCenter defaultCenter] addObserver:self
-                                             selector:@selector(textDidEndEditing:)
-                                                 name:NSControlTextDidEndEditingNotification
-                                               object:nil];
+    self.tableView.target = self;
+    self.tableView.doubleAction = @selector(doubleClickedTableView:);
 }
 
-- (void)dealloc
-{
+- (void)dealloc {
     // Remove from notification center
-    [[NSNotificationCenter defaultCenter] removeObserver:self
-                                                    name:NSControlTextDidEndEditingNotification
-                                                  object:nil];
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
 
 #pragma mark - Accessors
 
-- (void)setTableView:(NSTableView *)tableView
-{
-    _tableView = tableView;
-    
-    // Set double click action
-    [_tableView setTarget:self];
-    [_tableView setDoubleAction:@selector(tableViewDidDoubleClick:)];
+- (void)setCollections:(NSArray *)collections {
+    if (![_collections isEqual:collections]) {
+        _collections = collections;
+        
+        [self configureView];
+    }
 }
 
-- (void)setCollections:(NSArray *)collections
-{
-    _collections = collections;
-    
-    // Update
-    [self configureView];
+- (void)setSearchString:(NSString *)searchString {
+    if (![_searchString isEqualToString:searchString]) {
+        _searchString = searchString;
+        
+        [self configureView];
+    }
 }
 
-- (void)setSearchString:(NSString *)searchString
-{
-    _searchString = searchString;
+#pragma mark - Actions
+
+- (IBAction)textChanged:(id)sender {
+    NSInteger editedRowIndex = [self.tableView rowForView:sender];
+    NSInteger editedColumnIndex = [self.tableView columnForView:sender];
     
-    // Update
-    [self configureView];
-}
-
-
-#pragma mark - Notifications
-
-- (void)textDidEndEditing:(NSNotification *)notification
-{
-    NSInteger editedRow = [self.tableView editedRow];
-    NSInteger editedColumn = [self.tableView editedColumn];
-    
-    if (editedRow >= 0 && editedColumn >= 0) {
-        NSTextView *textView = (NSTextView *)notification.userInfo[@"NSFieldEditor"];
+    if (editedRowIndex >= 0 && editedColumnIndex >= 0) {
+        NSTextField *textField = (NSTextField *)sender;
         
         // Create a new localization
-        LNLocalization *localization = self.sortedLocalizations[editedRow];
+        LNLocalization *localization = self.sortedLocalizations[editedRowIndex];
         
         NSString *key = localization.key;
         NSString *value = localization.value;
         
-        NSString *columnIdentifier = [self.tableView evo_editedColumnIdentifier];
+        NSTableColumn *editedColumn = self.tableView.tableColumns[editedColumnIndex];
         
-        if ([columnIdentifier isEqualToString:@"key"]) {
-            key = textView.textStorage.string;
-        } else if ([columnIdentifier isEqualToString:@"value"]) {
-            value = textView.textStorage.string;
+        if ([editedColumn.identifier isEqualToString:@"key"]) {
+            key = textField.stringValue;
+        } else if ([editedColumn.identifier isEqualToString:@"value"]) {
+            value = textField.stringValue;
         }
         
-        LNLocalization *newLocalization = [LNLocalization localizationWithKey:key
-                                                                        value:value
-                                                                  entityRange:localization.entityRange
-                                                                     keyRange:localization.keyRange
-                                                                   valueRange:localization.valueRange
-                                                                   collection:localization.collection];
+        LNLocalization *newLocalization = [LNLocalization localizationWithKey:key value:value entityRange:localization.entityRange keyRange:localization.keyRange valueRange:localization.valueRange collection:localization.collection];
         
         // Replace in file
         [localization.collection replaceLocalization:localization withLocalization:newLocalization];
@@ -134,25 +107,18 @@ static NSString * const EVOPopoverContentViewCellReuseIdentifier = @"EVOPopoverC
     }
 }
 
-
-#pragma mark - Actions
-
-- (void)tableViewDidDoubleClick:(id)sender
-{
-    NSInteger clickedRow = [self.tableView clickedRow];
+- (void)doubleClickedTableView:(id)sender {
+    NSInteger clickedRow = self.tableView.clickedRow;
     
     if (clickedRow >= 0) {
         LNLocalization *localization = self.sortedLocalizations[clickedRow];
         
         // Post notification
-        [[NSNotificationCenter defaultCenter] postNotificationName:LNPopoverContentViewLocalizationDidSelectNotification
-                                                            object:self
-                                                          userInfo:@{LNPopoverContentViewLocalizationKey: localization}];
+        [[NSNotificationCenter defaultCenter] postNotificationName:LNPopoverContentViewLocalizationDidSelectNotification object:self userInfo:@{LNPopoverContentViewLocalizationKey: localization}];
     }
 }
 
-- (IBAction)addLocalization:(id)sender
-{
+- (IBAction)addLocalization:(id)sender {
     // Create alert
     NSBundle *bundle = [NSBundle bundleForClass:[self class]];
     NSViewController *viewController = [[NSViewController alloc] initWithNibName:@"LNAlertAccessoryView" bundle:bundle];
@@ -210,8 +176,7 @@ static NSString * const EVOPopoverContentViewCellReuseIdentifier = @"EVOPopoverC
     }
 }
 
-- (IBAction)deleteLocalization:(id)sender
-{
+- (IBAction)deleteLocalization:(id)sender {
     NSInteger selectedRow = [self.tableView selectedRow];
     
     if (selectedRow >= 0) {
@@ -230,26 +195,21 @@ static NSString * const EVOPopoverContentViewCellReuseIdentifier = @"EVOPopoverC
         [collection deleteLocalization:localization];
         
         // Delete localization from table view
-        [self.tableView removeRowsAtIndexes:[NSIndexSet indexSetWithIndex:selectedRow]
-                              withAnimation:NSTableViewAnimationEffectFade];
+        [self.tableView removeRowsAtIndexes:[NSIndexSet indexSetWithIndex:selectedRow] withAnimation:NSTableViewAnimationEffectFade];
         
         [self.tableView endUpdates];
     }
 }
 
-- (IBAction)detachPopover:(id)sender
-{
+- (IBAction)detachPopover:(id)sender {
     // Post notification
-    [[NSNotificationCenter defaultCenter] postNotificationName:LNPopoverContentViewDetachButtonDidClickNotification
-                                                        object:self
-                                                      userInfo:nil];
+    [[NSNotificationCenter defaultCenter] postNotificationName:LNPopoverContentViewDetachButtonDidClickNotification object:self userInfo:nil];
 }
 
 
 #pragma mark - Updating and Drawing the View
 
-- (void)reloadLocalizations
-{
+- (void)reloadLocalizations {
     NSMutableArray *localizations = [NSMutableArray array];
     
     for (LNLocalizationCollection *collection in self.collections) {
@@ -259,8 +219,7 @@ static NSString * const EVOPopoverContentViewCellReuseIdentifier = @"EVOPopoverC
     self.localizations = localizations;
 }
 
-- (void)filterLocalizations
-{
+- (void)filterLocalizations {
     // Filter localizations
     NSArray *filteredLocalizations = self.localizations;
     
@@ -272,8 +231,7 @@ static NSString * const EVOPopoverContentViewCellReuseIdentifier = @"EVOPopoverC
     self.sortedLocalizations = [[filteredLocalizations sortedArrayUsingDescriptors:self.tableView.sortDescriptors] mutableCopy];
 }
 
-- (void)configureView
-{
+- (void)configureView {
     // Reload localizations
     [self reloadLocalizations];
     
@@ -287,8 +245,7 @@ static NSString * const EVOPopoverContentViewCellReuseIdentifier = @"EVOPopoverC
 
 #pragma mark - NSTableViewDataSource
 
-- (NSInteger)numberOfRowsInTableView:(NSTableView *)tableView
-{
+- (NSInteger)numberOfRowsInTableView:(NSTableView *)tableView {
     return self.sortedLocalizations.count;
 }
 
@@ -301,28 +258,27 @@ static NSString * const EVOPopoverContentViewCellReuseIdentifier = @"EVOPopoverC
     
     if([identifier isEqualToString:@"table"]) {
         cell.textField.stringValue = localization.collection.filePath.lastPathComponent;
+        cell.textField.editable = NO;
     }
     else if ([identifier isEqualToString:@"language"]) {
         cell.textField.stringValue = localization.collection.languageDesignation;
+        cell.textField.editable = NO;
     }
     else if ([identifier isEqualToString:@"key"]) {
         cell.textField.stringValue = localization.key;
+        cell.textField.editable = YES;
     }
     else if ([identifier isEqualToString:@"value"]) {
         cell.textField.stringValue = localization.value;
-    } else {
-        cell.textField.stringValue = nil;
+        cell.textField.editable = YES;
     }
     
     return cell;
 }
 
-- (void)tableView:(NSTableView *)tableView sortDescriptorsDidChange:(NSArray *)oldDescriptors
-{
+- (void)tableView:(NSTableView *)tableView sortDescriptorsDidChange:(NSArray *)oldDescriptors {
     // Update
     [self configureView];
 }
-
-#pragma mark - NSTableViewDelegate
 
 @end

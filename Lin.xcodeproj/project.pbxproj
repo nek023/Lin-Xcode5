@@ -26,7 +26,6 @@
 		AA470D7D17C3DE31005CBB7F /* LNDetectorTests.m in Sources */ = {isa = PBXBuildFile; fileRef = AA470D7C17C3DE31005CBB7F /* LNDetectorTests.m */; };
 		AA7D4DB117C74CFE0092DF8A /* LNLocalizationCollection.m in Sources */ = {isa = PBXBuildFile; fileRef = AA7D4DB017C74CFE0092DF8A /* LNLocalizationCollection.m */; };
 		AA7D4DB417C74D0A0092DF8A /* LNLocalization.m in Sources */ = {isa = PBXBuildFile; fileRef = AA7D4DB317C74D0A0092DF8A /* LNLocalization.m */; };
-		AA8F8EF017EDFC68004964FB /* NSTableView+EditedColumnIdentifier.m in Sources */ = {isa = PBXBuildFile; fileRef = AA8F8EEF17EDFC68004964FB /* NSTableView+EditedColumnIdentifier.m */; };
 		AA95FDEC17EB48A9007D33D4 /* MainViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = AA95FDEB17EB48A9007D33D4 /* MainViewController.xib */; };
 		AA95FDEF17EB4E77007D33D4 /* LNPopoverWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = AA95FDEE17EB4E77007D33D4 /* LNPopoverWindowController.m */; };
 		AAAC873317ED9D4F00BF251D /* LNHorizontalLine.m in Sources */ = {isa = PBXBuildFile; fileRef = AAAC873217ED9D4F00BF251D /* LNHorizontalLine.m */; };
@@ -98,8 +97,6 @@
 		AA7D4DB017C74CFE0092DF8A /* LNLocalizationCollection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LNLocalizationCollection.m; sourceTree = "<group>"; };
 		AA7D4DB217C74D0A0092DF8A /* LNLocalization.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LNLocalization.h; sourceTree = "<group>"; };
 		AA7D4DB317C74D0A0092DF8A /* LNLocalization.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LNLocalization.m; sourceTree = "<group>"; };
-		AA8F8EEE17EDFC68004964FB /* NSTableView+EditedColumnIdentifier.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSTableView+EditedColumnIdentifier.h"; sourceTree = "<group>"; };
-		AA8F8EEF17EDFC68004964FB /* NSTableView+EditedColumnIdentifier.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSTableView+EditedColumnIdentifier.m"; sourceTree = "<group>"; };
 		AA93691517C4E4C000E94318 /* IDEWorkspace.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IDEWorkspace.h; sourceTree = "<group>"; };
 		AA95FDEB17EB48A9007D33D4 /* MainViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MainViewController.xib; sourceTree = "<group>"; };
 		AA95FDED17EB4E77007D33D4 /* LNPopoverWindowController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LNPopoverWindowController.h; sourceTree = "<group>"; };
@@ -316,8 +313,6 @@
 			children = (
 				AADEADB517C87298001E0C65 /* IDEIndex+Lin.h */,
 				AADEADB617C87298001E0C65 /* IDEIndex+Lin.m */,
-				AA8F8EEE17EDFC68004964FB /* NSTableView+EditedColumnIdentifier.h */,
-				AA8F8EEF17EDFC68004964FB /* NSTableView+EditedColumnIdentifier.m */,
 			);
 			path = Categories;
 			sourceTree = "<group>";
@@ -462,7 +457,6 @@
 				AA7D4DB117C74CFE0092DF8A /* LNLocalizationCollection.m in Sources */,
 				AAB0CD3417C448200085E913 /* LNRegularExpressionPattern+type.m in Sources */,
 				AAAC873B17EDA9CF00BF251D /* LNPopoverWindow.m in Sources */,
-				AA8F8EF017EDFC68004964FB /* NSTableView+EditedColumnIdentifier.m in Sources */,
 				AA02CE8E17EE083A0041C2BD /* LNAlertAccessoryView.m in Sources */,
 				AA470D5E17C3D05D005CBB7F /* LNEntity.m in Sources */,
 				AA7D4DB417C74D0A0092DF8A /* LNLocalization.m in Sources */,
