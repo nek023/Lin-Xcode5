@@ -13,6 +13,6 @@
 @property (nonatomic, copy, readonly) NSString *string;
 @property (nonatomic, copy, readonly) NSArray *keys;
 
-- (instancetype)initWithString:(NSString *)string keys:(NSString *)keyValue, ... NS_REQUIRES_NIL_TERMINATION;
+- (instancetype)initWithString:(NSString *)string keys:(NSString *)keyValue, ... NS_REQUIRES_NIL_TERMINATION NS_DESIGNATED_INITIALIZER;
 
 @end
