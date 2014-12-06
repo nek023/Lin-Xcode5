@@ -11,7 +11,6 @@
 extern NSString * const LNPopoverContentViewLocalizationKey;
 
 extern NSString * const LNPopoverContentViewLocalizationDidSelectNotification;
-extern NSString * const LNPopoverContentViewAlertDidDismissNotification;
 extern NSString * const LNPopoverContentViewDetachButtonDidClickNotification;
 
 @interface MainViewController : NSViewController

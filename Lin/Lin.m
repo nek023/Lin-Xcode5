@@ -7,8 +7,6 @@
 //
 
 #import "Lin.h"
-
-// Xcode
 #import "IDEWorkspace.h"
 #import "DVTFilePath.h"
 #import "IDEIndex.h"
@@ -16,40 +14,28 @@
 #import "IDEEditorDocument.h"
 #import "IDEWorkspaceWindow.h"
 #import "DVTSourceTextView.h"
-
-// Shared
 #import "LNUserDefaultsManager.h"
-
-// Models
 #import "LNDetector.h"
 #import "LNEntity.h"
 #import "LNLocalizationCollection.h"
 #import "LNLocalization.h"
-
-// Controllers
 #import "MainViewController.h"
-#import "LNPopoverWindowController.h"
 #import "LNLocalizedStringCollectionOperation.h"
+#import "PopoverWindowController.h"
 
 static Lin *_sharedPlugin = nil;
-
-//@interface NSPopover ()
-//
-//- (id)_popoverWindow;
-//
-//@end
 
 @interface Lin ()
 
 @property (nonatomic, strong) NSPopover *popover;
-//@property (nonatomic, strong) LNPopoverWindowController *popoverWindowController;
+@property (nonatomic, strong) PopoverWindowController *popoverWindowController;
 
 @property (nonatomic, strong) NSTextView *textView;
 
 @property (nonatomic, strong) LNDetector *detector;
 @property (nonatomic, strong) NSMutableDictionary *workspaceLocalizations;
 @property (nonatomic, copy) NSString *currentWorkspaceFilePath;
-////@property (nonatomic, weak) NSResponder *previousFirstResponder;
+@property (nonatomic, unsafe_unretained) NSResponder *previousFirstResponder;
 @property (nonatomic, assign, getter = isActivated) BOOL activated;
 
 @property (nonatomic, strong) NSMenuItem *enableMenuItem;
@@ -84,18 +70,15 @@ static Lin *_sharedPlugin = nil;
         
         // Load views
         [self instantiatePopover];
-//        [self instantiatePopoverWindowController];
+        [self instantiatePopoverWindowController];
         
         // Register to notification center
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(workspaceWindowDidBecomeMain:) name:NSWindowDidBecomeMainNotification object:nil];
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(indexDidIndexWorkspace:) name:@"IDEIndexDidIndexWorkspaceNotification" object:nil];
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(editorDocumentDidSave:) name:@"IDEEditorDocumentDidSaveNotification" object:nil];
         
-//        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(popoverWindowControllerWindowWillClose:) name:LNPopoverWindowControllerWindowWillCloseNotification object:nil];
-        
-//        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(popoverContentViewLocalizationDidSelect:) name:LNPopoverContentViewLocalizationDidSelectNotification object:nil];
-//        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(popoverContentViewAlertDidDismiss:) name:LNPopoverContentViewAlertDidDismissNotification object:nil];
-//        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(popoverContentViewDetachButtonDidClick:) name:LNPopoverContentViewDetachButtonDidClickNotification object:nil];
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(popoverContentViewLocalizationDidSelect:) name:LNPopoverContentViewLocalizationDidSelectNotification object:nil];
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(popoverContentViewDetachButtonDidClick:) name:LNPopoverContentViewDetachButtonDidClickNotification object:nil];
         
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(menuDidChange:) name:NSMenuDidChangeItemNotification object:nil];
         
@@ -124,16 +107,16 @@ static Lin *_sharedPlugin = nil;
     
     self.popover = popover;
 }
-//
-//- (void)instantiatePopoverWindowController {
-//    NSBundle *bundle = [NSBundle bundleForClass:[self class]];
-//    MainViewController *contentViewController = [[MainViewController alloc] initWithNibName:@"MainViewController" bundle:bundle];
-//    contentViewController.inPopover = NO;
-//    
-//    LNPopoverWindowController *popoverWindowController = [[LNPopoverWindowController alloc] initWithContentViewController:contentViewController];
-//    
-//    self.popoverWindowController = popoverWindowController;
-//}
+
+- (void)instantiatePopoverWindowController {
+    NSBundle *bundle = [NSBundle bundleForClass:[self class]];
+    MainViewController *contentViewController = [[MainViewController alloc] initWithNibName:@"MainViewController" bundle:bundle];
+    contentViewController.inPopover = NO;
+    
+    PopoverWindowController *popoverWindowController = [[PopoverWindowController alloc] initWithContentViewController:contentViewController];
+    
+    self.popoverWindowController = popoverWindowController;
+}
 
 - (void)dealloc {
     // Deactivate
@@ -168,7 +151,7 @@ static Lin *_sharedPlugin = nil;
 #pragma mark - Notifications
 
 - (void)textDidChange:(NSNotification *)notification {
-	if ([notification.object isKindOfClass:DVTSourceTextView.class]) {
+    if ([notification.object isKindOfClass:DVTSourceTextView.class]) {
         NSTextView *textView = (NSTextView *)notification.object;
         self.textView = textView;
         
@@ -180,11 +163,11 @@ static Lin *_sharedPlugin = nil;
         } else {
             [self dismissPopover];
         }
-	}
+    }
 }
 
 - (void)textViewDidChangeSelection:(NSNotification *)notification {
-	if ([notification.object isKindOfClass:DVTSourceTextView.class]) {
+    if ([notification.object isKindOfClass:DVTSourceTextView.class]) {
         NSTextView *textView = (NSTextView *)notification.object;
         self.textView = textView;
         
@@ -196,7 +179,7 @@ static Lin *_sharedPlugin = nil;
         } else {
             [self dismissPopover];
         }
-	}
+    }
 }
 
 - (void)workspaceWindowDidBecomeMain:(NSNotification *)notification {
@@ -234,41 +217,31 @@ static Lin *_sharedPlugin = nil;
     }
 }
 
-//- (void)popoverWindowControllerWindowWillClose:(NSNotification *)notification {
-//    // Instantiate popover
-//    [self instantiatePopover];
-//}
+- (void)popoverContentViewLocalizationDidSelect:(NSNotification *)notification {
+    NSTextView *textView = self.textView;
+    LNEntity *entity = [self selectedEntityInTextView:textView];
 
-//- (void)popoverContentViewLocalizationDidSelect:(NSNotification *)notification {
-//    NSTextView *textView = self.textView;
-//    LNEntity *entity = [self selectedEntityInTextView:textView];
-//    
-//    if (entity) {
-//        NSArray *selectedRanges = textView.selectedRanges;
-//        
-//        if (selectedRanges.count > 0) {
-//            NSRange selectedRange = [selectedRanges[0] rangeValue];
-//            
-//            // Locate the key
-//            NSRange lineRange = [textView.textStorage.string lineRangeForRange:selectedRange];
-//            NSRange keyRange = NSMakeRange(lineRange.location + entity.keyRange.location, entity.keyRange.length);
-//            
-//            // Replace
-//            LNLocalization *localization = [notification userInfo][LNPopoverContentViewLocalizationKey];
-//            [textView insertText:localization.key replacementRange:keyRange];
-//        }
-//    }
-//}
+    if (entity) {
+        NSArray *selectedRanges = textView.selectedRanges;
 
-//- (void)popoverContentViewAlertDidDismiss:(NSNotification *)notification {
-//    // Show popover again
-//    [self presentPopoverInTextView:self.textView entity:[self selectedEntityInTextView:self.textView]];
-//}
+        if (selectedRanges.count > 0) {
+            NSRange selectedRange = [selectedRanges[0] rangeValue];
 
-//- (void)popoverContentViewDetachButtonDidClick:(NSNotification *)notification {
-//    [self preparePopoverWindow];
-//    [self detachPopover];
-//}
+            // Locate the key
+            NSRange lineRange = [textView.textStorage.string lineRangeForRange:selectedRange];
+            NSRange keyRange = NSMakeRange(lineRange.location + entity.keyRange.location, entity.keyRange.length);
+
+            // Replace
+            LNLocalization *localization = [notification userInfo][LNPopoverContentViewLocalizationKey];
+            [textView insertText:localization.key replacementRange:keyRange];
+        }
+    }
+}
+
+- (void)popoverContentViewDetachButtonDidClick:(NSNotification *)notification {
+    [self preparePopoverWindow];
+    [self detachPopover];
+}
 
 - (void)menuDidChange:(NSNotification *)notification {
     // Create menu item
@@ -277,24 +250,24 @@ static Lin *_sharedPlugin = nil;
 
 #pragma mark - Detaching Popover
 
-//- (void)preparePopoverWindow {
-//    // Resize popover window
-//    NSWindow *popoverWindow = [self.popover _popoverWindow];
-//    
-//    [self.popoverWindowController.window setFrame:NSMakeRect(popoverWindow.frame.origin.x, popoverWindow.frame.origin.y - (80.0 / 2.0), self.popover.contentSize.width, self.popover.contentSize.height + 80.0) display:NO];
-//    
-//    // Copy popover content
-//    MainViewController *popoverMainViewController = (MainViewController *)self.popover.contentViewController;
-//    MainViewController *popoverWindowMainViewController = (MainViewController *)self.popoverWindowController.contentViewController;
-//    popoverWindowMainViewController.tableView.sortDescriptors = popoverMainViewController.tableView.sortDescriptors;
-//    popoverWindowMainViewController.collections = popoverMainViewController.collections;
-//    popoverWindowMainViewController.searchString = popoverMainViewController.searchString;
-//}
+- (void)preparePopoverWindow {
+    // Resize popover window
+    NSWindow *popoverWindow = self.popover.contentViewController.view.window;
+    
+    [self.popoverWindowController.window setFrame:NSMakeRect(popoverWindow.frame.origin.x, popoverWindow.frame.origin.y - (80.0 / 2.0), self.popover.contentSize.width, self.popover.contentSize.height + 80.0) display:NO];
+    
+    // Copy popover content
+    MainViewController *popoverMainViewController = (MainViewController *)self.popover.contentViewController;
+    MainViewController *windowMainViewController = (MainViewController *)self.popoverWindowController.contentViewController;
+    windowMainViewController.tableView.sortDescriptors = popoverMainViewController.tableView.sortDescriptors;
+    windowMainViewController.collections = popoverMainViewController.collections;
+    windowMainViewController.searchString = popoverMainViewController.searchString;
+}
 
-//- (void)detachPopover {
-//    [self dismissPopover];
-//    [self.popoverWindowController showWindow:nil];
-//}
+- (void)detachPopover {
+    [self dismissPopover];
+    [self.popoverWindowController showWindow:nil];
+}
 
 #pragma mark - Entity
 
@@ -391,17 +364,17 @@ static Lin *_sharedPlugin = nil;
 }
 
 - (void)showWindow:(id)sender {
-//    // Prepare window
-//    NSArray *collections = self.workspaceLocalizations[self.currentWorkspaceFilePath];
-//    
-//    MainViewController *mainViewController = (MainViewController *)self.popoverWindowController.contentViewController;
-//    mainViewController.collections = collections;
-//    mainViewController.searchString = @"";
-//    
-//    // Show window
-//    [self.popoverWindowController.window setFrame:NSMakeRect(0, 0, 500, 280) display:NO];
-//    [self.popoverWindowController.window center];
-//    [self.popoverWindowController showWindow:nil];
+    // Prepare window
+    NSArray *collections = self.workspaceLocalizations[self.currentWorkspaceFilePath];
+    
+    MainViewController *mainViewController = (MainViewController *)self.popoverWindowController.contentViewController;
+    mainViewController.collections = collections;
+    mainViewController.searchString = nil;
+    
+    // Show window
+    [self.popoverWindowController.window setFrame:NSMakeRect(0, 0, 500, 280) display:NO];
+    [self.popoverWindowController.window center];
+    [self.popoverWindowController showWindow:nil];
 }
 
 - (void)showVersionInfo:(id)sender {
@@ -441,10 +414,10 @@ static Lin *_sharedPlugin = nil;
             if ([self.popover isShown]) {
                 MainViewController *mainViewController = (MainViewController *)self.popover.contentViewController;
                 mainViewController.collections = collections;
-            } //else if ([self.popoverWindowController.window isVisible]) {
-//                MainViewController *mainViewController = (MainViewController *)self.popoverWindowController.contentViewController;
-//                mainViewController.collections = collections;
-//            }
+            } else if ([self.popoverWindowController.window isVisible]) {
+                MainViewController *mainViewController = (MainViewController *)self.popoverWindowController.contentViewController;
+                mainViewController.collections = collections;
+            }
         }
     };
     
@@ -486,12 +459,12 @@ static Lin *_sharedPlugin = nil;
         NSArray *collections = self.workspaceLocalizations[self.currentWorkspaceFilePath];
         NSString *key = [textView.textStorage.string substringWithRange:NSMakeRange(lineRange.location + entity.keyRange.location, entity.keyRange.length)];
         
-//        if ([self.popoverWindowController.window isVisible]) {
-//            // Update popover content
-//            MainViewController *mainViewController = (MainViewController *)self.popoverWindowController.contentViewController;
-//            mainViewController.collections = collections;
-//            mainViewController.searchString = key;
-//        } else {
+        if ([self.popoverWindowController.window isVisible]) {
+            // Update popover content
+            MainViewController *mainViewController = (MainViewController *)self.popoverWindowController.contentViewController;
+            mainViewController.collections = collections;
+            mainViewController.searchString = key;
+        } else {
             if ([self.popover isShown]) {
                 // Update the position for popover when the cursor moved
                 self.popover.positioningRect = keyRectOnTextView;
@@ -508,48 +481,48 @@ static Lin *_sharedPlugin = nil;
                 mainViewController.collections = collections;
                 mainViewController.searchString = key;
             }
-//        }
+        }
     }
 }
 
 - (void)dismissPopover {
-//    if ([self.popoverWindowController.window isVisible]) {
-//        // Update popover content
-//        NSArray *collections = self.workspaceLocalizations[self.currentWorkspaceFilePath];
-//        
-//        MainViewController *mainViewController = (MainViewController *)self.popoverWindowController.contentViewController;
-//        mainViewController.collections = collections;
-//        mainViewController.searchString = nil;
-//    } else {
+    if ([self.popoverWindowController.window isVisible]) {
+        // Update popover content
+        NSArray *collections = self.workspaceLocalizations[self.currentWorkspaceFilePath];
+        
+        MainViewController *mainViewController = (MainViewController *)self.popoverWindowController.contentViewController;
+        mainViewController.collections = collections;
+        mainViewController.searchString = nil;
+    } else {
         // Hide popover
         if (self.popover.isShown) {
             [self.popover performClose:self];
         }
-//    }
+    }
 }
 
 #pragma mark - NSPopoverDelegate
 
-//- (void)popoverWillShow:(NSNotification *)notification {
-//    // Save first responder
-////    self.previousFirstResponder = [self.textView.window firstResponder];
-//}
-//
-//- (void)popoverDidShow:(NSNotification *)notification {
-//    // Reclaim key window and first responder
-//    [self.textView.window becomeKeyWindow];
-////    [self.textView.window makeFirstResponder:self.previousFirstResponder];
-//}
+- (void)popoverWillShow:(NSNotification *)notification {
+    // Save first responder
+    self.previousFirstResponder = [self.textView.window firstResponder];
+}
+
+- (void)popoverDidShow:(NSNotification *)notification {
+    // Reclaim key window and first responder
+    [self.textView.window becomeKeyWindow];
+    [self.textView.window makeFirstResponder:self.previousFirstResponder];
+}
 
 - (BOOL)popoverShouldDetach:(NSPopover *)popover {
     return YES;
 }
 
-//- (NSWindow *)detachableWindowForPopover:(NSPopover *)popover {
-//    // Prepare for detaching
-//    [self preparePopoverWindow];
-//    
-//    return self.popoverWindowController.window;
-//}
+- (NSWindow *)detachableWindowForPopover:(NSPopover *)popover {
+    // Prepare for detaching
+    [self preparePopoverWindow];
+    
+    return self.popoverWindowController.window;
+}
 
 @end

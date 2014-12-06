@@ -14,7 +14,6 @@
 NSString * const LNPopoverContentViewLocalizationKey = @"LNPopoverContentViewLocalizationKey";
 
 NSString * const LNPopoverContentViewLocalizationDidSelectNotification = @"LNPopoverContentViewRowDidDoubleClickNotification";
-NSString * const LNPopoverContentViewAlertDidDismissNotification = @"LNPopoverContentViewAlertDidDismissNotification";
 NSString * const LNPopoverContentViewDetachButtonDidClickNotification = @"LNPopoverContentViewDetachButtonDidClickNotification";
 
 static NSString * const EVOPopoverContentViewCellReuseIdentifier = @"EVOPopoverContentViewCellReuseIdentifier";
@@ -255,10 +254,6 @@ static NSString * const EVOPopoverContentViewCellReuseIdentifier = @"EVOPopoverC
 #pragma mark - AddViewControllerDelegate
 
 - (void)addViewControllerDidCancel:(AddViewController *)addViewController {
-    // TODO: post notification?
-    // [[NSNotificationCenter defaultCenter] postNotificationName:LNPopoverContentViewAlertDidDismissNotification
-    //                                                                object:self
-    //
     [self dismissViewController:addViewController];
 }
 
@@ -269,10 +264,6 @@ static NSString * const EVOPopoverContentViewCellReuseIdentifier = @"EVOPopoverC
     // Update views
     [self configureView];
     
-    // TODO: post notification?
-    // [[NSNotificationCenter defaultCenter] postNotificationName:LNPopoverContentViewAlertDidDismissNotification
-    //                                                                object:self
-    //                                                              userInfo:nil];
     [self dismissViewController:addViewController];
 }
 

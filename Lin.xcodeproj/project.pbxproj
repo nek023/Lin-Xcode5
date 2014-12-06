@@ -27,9 +27,9 @@
 		AA7D4DB117C74CFE0092DF8A /* LNLocalizationCollection.m in Sources */ = {isa = PBXBuildFile; fileRef = AA7D4DB017C74CFE0092DF8A /* LNLocalizationCollection.m */; };
 		AA7D4DB417C74D0A0092DF8A /* LNLocalization.m in Sources */ = {isa = PBXBuildFile; fileRef = AA7D4DB317C74D0A0092DF8A /* LNLocalization.m */; };
 		AA95FDEC17EB48A9007D33D4 /* MainViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = AA95FDEB17EB48A9007D33D4 /* MainViewController.xib */; };
-		AA95FDEF17EB4E77007D33D4 /* LNPopoverWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = AA95FDEE17EB4E77007D33D4 /* LNPopoverWindowController.m */; };
+		AA95FDEF17EB4E77007D33D4 /* PopoverWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = AA95FDEE17EB4E77007D33D4 /* PopoverWindowController.m */; };
 		AAAC873317ED9D4F00BF251D /* LNHorizontalLine.m in Sources */ = {isa = PBXBuildFile; fileRef = AAAC873217ED9D4F00BF251D /* LNHorizontalLine.m */; };
-		AAAC873B17EDA9CF00BF251D /* LNPopoverWindow.m in Sources */ = {isa = PBXBuildFile; fileRef = AAAC873A17EDA9CF00BF251D /* LNPopoverWindow.m */; };
+		AAAC873B17EDA9CF00BF251D /* PopoverWindow.m in Sources */ = {isa = PBXBuildFile; fileRef = AAAC873A17EDA9CF00BF251D /* PopoverWindow.m */; };
 		AAB0CD3117C4382D0085E913 /* LNRegularExpressionPattern.m in Sources */ = {isa = PBXBuildFile; fileRef = AAB0CD3017C4382D0085E913 /* LNRegularExpressionPattern.m */; };
 		AAB0CD3417C448200085E913 /* LNRegularExpressionPattern+type.m in Sources */ = {isa = PBXBuildFile; fileRef = AAB0CD3317C448200085E913 /* LNRegularExpressionPattern+type.m */; };
 		AAB0CD3617C46A730085E913 /* LNDetector.m in Sources */ = {isa = PBXBuildFile; fileRef = AA470D5A17C3CFEC005CBB7F /* LNDetector.m */; };
@@ -99,12 +99,12 @@
 		AA7D4DB317C74D0A0092DF8A /* LNLocalization.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LNLocalization.m; sourceTree = "<group>"; };
 		AA93691517C4E4C000E94318 /* IDEWorkspace.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IDEWorkspace.h; sourceTree = "<group>"; };
 		AA95FDEB17EB48A9007D33D4 /* MainViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MainViewController.xib; sourceTree = "<group>"; };
-		AA95FDED17EB4E77007D33D4 /* LNPopoverWindowController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LNPopoverWindowController.h; sourceTree = "<group>"; };
-		AA95FDEE17EB4E77007D33D4 /* LNPopoverWindowController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LNPopoverWindowController.m; sourceTree = "<group>"; };
+		AA95FDED17EB4E77007D33D4 /* PopoverWindowController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PopoverWindowController.h; sourceTree = "<group>"; };
+		AA95FDEE17EB4E77007D33D4 /* PopoverWindowController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PopoverWindowController.m; sourceTree = "<group>"; };
 		AAAC873117ED9D4F00BF251D /* LNHorizontalLine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LNHorizontalLine.h; sourceTree = "<group>"; };
 		AAAC873217ED9D4F00BF251D /* LNHorizontalLine.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LNHorizontalLine.m; sourceTree = "<group>"; };
-		AAAC873917EDA9CF00BF251D /* LNPopoverWindow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LNPopoverWindow.h; sourceTree = "<group>"; };
-		AAAC873A17EDA9CF00BF251D /* LNPopoverWindow.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LNPopoverWindow.m; sourceTree = "<group>"; };
+		AAAC873917EDA9CF00BF251D /* PopoverWindow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PopoverWindow.h; sourceTree = "<group>"; };
+		AAAC873A17EDA9CF00BF251D /* PopoverWindow.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PopoverWindow.m; sourceTree = "<group>"; };
 		AAB0CD2F17C4382D0085E913 /* LNRegularExpressionPattern.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LNRegularExpressionPattern.h; sourceTree = "<group>"; };
 		AAB0CD3017C4382D0085E913 /* LNRegularExpressionPattern.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LNRegularExpressionPattern.m; sourceTree = "<group>"; };
 		AAB0CD3217C448200085E913 /* LNRegularExpressionPattern+type.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "LNRegularExpressionPattern+type.h"; sourceTree = "<group>"; };
@@ -331,8 +331,8 @@
 		AADDDA9C17C4A0E200BBA67C /* Window Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				AA95FDED17EB4E77007D33D4 /* LNPopoverWindowController.h */,
-				AA95FDEE17EB4E77007D33D4 /* LNPopoverWindowController.m */,
+				AA95FDED17EB4E77007D33D4 /* PopoverWindowController.h */,
+				AA95FDEE17EB4E77007D33D4 /* PopoverWindowController.m */,
 			);
 			path = "Window Controllers";
 			sourceTree = "<group>";
@@ -342,8 +342,8 @@
 			children = (
 				AAAC873117ED9D4F00BF251D /* LNHorizontalLine.h */,
 				AAAC873217ED9D4F00BF251D /* LNHorizontalLine.m */,
-				AAAC873917EDA9CF00BF251D /* LNPopoverWindow.h */,
-				AAAC873A17EDA9CF00BF251D /* LNPopoverWindow.m */,
+				AAAC873917EDA9CF00BF251D /* PopoverWindow.h */,
+				AAAC873A17EDA9CF00BF251D /* PopoverWindow.m */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -456,7 +456,7 @@
 			files = (
 				AA7D4DB117C74CFE0092DF8A /* LNLocalizationCollection.m in Sources */,
 				AAB0CD3417C448200085E913 /* LNRegularExpressionPattern+type.m in Sources */,
-				AAAC873B17EDA9CF00BF251D /* LNPopoverWindow.m in Sources */,
+				AAAC873B17EDA9CF00BF251D /* PopoverWindow.m in Sources */,
 				AA470D5E17C3D05D005CBB7F /* LNEntity.m in Sources */,
 				AA7D4DB417C74D0A0092DF8A /* LNLocalization.m in Sources */,
 				2B0E049B1A3385AE0052E29D /* AddViewController.m in Sources */,
@@ -466,7 +466,7 @@
 				2B2FEC9B1A2F894500D0534D /* MainViewController.m in Sources */,
 				AADEADB717C87298001E0C65 /* IDEIndex+Lin.m in Sources */,
 				AA2980B417EE2C5300CF46E3 /* LNUserDefaultsManager.m in Sources */,
-				AA95FDEF17EB4E77007D33D4 /* LNPopoverWindowController.m in Sources */,
+				AA95FDEF17EB4E77007D33D4 /* PopoverWindowController.m in Sources */,
 				F5859DBD18CABC2A009AF108 /* LNLocalizedStringCollectionOperation.m in Sources */,
 				AA470D5B17C3CFEC005CBB7F /* LNDetector.m in Sources */,
 			);
