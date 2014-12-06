@@ -12,6 +12,10 @@ Lin for Xcode 5
 Lin for Xcode 4  
 [questbeat/Lin](https://github.com/questbeat/Lin)
 
+## Compatibility
+
+**This version of Lin requires Mac OS X 10.10 (Yosemite) and Xcode 6.1.1 (Build 6A2008a) or Xcode 6.2 beta (Build 6C86e).**
+
 ## Features
 When you are focusing on NSLocalizedString or other functions to get a localized version of a string, Lin shows the list of localizations that contains the inputted key string.
 

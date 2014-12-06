@@ -17,7 +17,7 @@
 	<key>CFBundlePackageType</key>
 	<string>BNDL</string>
 	<key>CFBundleShortVersionString</key>
-	<string>1.0</string>
+	<string>3.0</string>
 	<key>CFBundleSignature</key>
 	<string>????</string>
 	<key>CFBundleVersion</key>
@@ -25,6 +25,7 @@
 	<key>DVTPlugInCompatibilityUUIDs</key>
 	<array>
 		<string>C4A681B0-4A26-480E-93EC-1218098B9AA0</string>
+		<string>FEC992CC-CA4A-4CFD-8881-77300FCB848A</string>
 	</array>
 	<key>LSApplicationCategoryType</key>
 	<string></string>

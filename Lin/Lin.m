@@ -383,7 +383,7 @@ static Lin *_sharedPlugin = nil;
     NSAlert *alert = [[NSAlert alloc] init];
     alert.messageText = @"Lin";
     [alert addButtonWithTitle:@"OK"];
-    alert.informativeText = [NSString stringWithFormat:@"Version %@\n\nCopyright (c) 2014 Sascha Schwabbauer\n\nEmail: sascha@evolved.io\nTwitter: @_SaschaS", [bundle objectForInfoDictionaryKey:@"CFBundleShortVersionString"]];
+    alert.informativeText = [NSString stringWithFormat:@"Version %@\n\nVersion 1 and 2 by Katsuma Tanaka\n(Email: questbeat@gmail.com, Twitter: @questbeat)\n\nVersion 3 by Sascha Schwabbauer\n(Email: sascha@evolved.io, Twitter: @_SaschaS)", [bundle objectForInfoDictionaryKey:@"CFBundleShortVersionString"]];
     
     // Set icon
     NSString *filePath = [bundle pathForResource:@"icon120" ofType:@"tiff"];
