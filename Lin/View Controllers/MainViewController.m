@@ -7,13 +7,9 @@
 //
 
 #import "MainViewController.h"
-
-// Models
 #import "LNLocalizationCollection.h"
 #import "LNLocalization.h"
-
-// Views
-#import "LNAlertAccessoryView.h"
+#import "AddViewController.h"
 
 NSString * const LNPopoverContentViewLocalizationKey = @"LNPopoverContentViewLocalizationKey";
 
@@ -23,21 +19,19 @@ NSString * const LNPopoverContentViewDetachButtonDidClickNotification = @"LNPopo
 
 static NSString * const EVOPopoverContentViewCellReuseIdentifier = @"EVOPopoverContentViewCellReuseIdentifier";
 
-@interface MainViewController () <NSTableViewDataSource, NSTableViewDelegate>
+@interface MainViewController () <NSTableViewDataSource, NSTableViewDelegate, AddViewControllerDelegate>
 
-@property (nonatomic, weak, readwrite) IBOutlet NSTableView *tableView;
-@property (nonatomic, weak, readwrite) IBOutlet NSButton *detachButton;
+@property (nonatomic, weak) IBOutlet NSTableView *tableView;
+@property (nonatomic, weak) IBOutlet NSButton *detachButton;
 
 @property (nonatomic, strong) NSMutableArray *localizations;
 @property (nonatomic, strong) NSMutableArray *sortedLocalizations;
 
-- (IBAction)addLocalization:(id)sender;
-- (IBAction)deleteLocalization:(id)sender;
-- (IBAction)detachPopover:(id)sender;
-
 @end
 
 @implementation MainViewController
+
+#pragma mark - NSViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -48,6 +42,9 @@ static NSString * const EVOPopoverContentViewCellReuseIdentifier = @"EVOPopoverC
     
     self.tableView.target = self;
     self.tableView.doubleAction = @selector(doubleClickedTableView:);
+    
+    [self configureForPresentationInPopover:self.isInPopover];
+    [self configureView];
 }
 
 - (void)dealloc {
@@ -55,14 +52,35 @@ static NSString * const EVOPopoverContentViewCellReuseIdentifier = @"EVOPopoverC
     [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
+#pragma mark - Helper methods
+
+- (void)configureForPresentationInPopover:(BOOL)inPopover {
+    if (inPopover) {
+        self.tableView.selectionHighlightStyle = NSTableViewSelectionHighlightStyleSourceList;
+    } else {
+        self.detachButton.hidden = YES;
+    }
+}
 
 #pragma mark - Accessors
+
+- (void)setInPopover:(BOOL)inPopover {
+    if (_inPopover != inPopover) {
+        _inPopover = inPopover;
+        
+        if (self.isViewLoaded) {
+            [self configureForPresentationInPopover:_inPopover];
+        }
+    }
+}
 
 - (void)setCollections:(NSArray *)collections {
     if (![_collections isEqual:collections]) {
         _collections = collections;
         
-        [self configureView];
+        if (self.isViewLoaded) {
+            [self configureView];
+        }
     }
 }
 
@@ -70,7 +88,9 @@ static NSString * const EVOPopoverContentViewCellReuseIdentifier = @"EVOPopoverC
     if (![_searchString isEqualToString:searchString]) {
         _searchString = searchString;
         
-        [self configureView];
+        if (self.isViewLoaded) {
+            [self configureView];
+        }
     }
 }
 
@@ -121,63 +141,15 @@ static NSString * const EVOPopoverContentViewCellReuseIdentifier = @"EVOPopoverC
 - (IBAction)addLocalization:(id)sender {
     // Create alert
     NSBundle *bundle = [NSBundle bundleForClass:[self class]];
-    NSViewController *viewController = [[NSViewController alloc] initWithNibName:@"LNAlertAccessoryView" bundle:bundle];
-    LNAlertAccessoryView *accessoryView = (LNAlertAccessoryView *)viewController.view;
-    accessoryView.collections = self.collections;
+    AddViewController *addViewController = [[AddViewController alloc] initWithNibName:@"AddViewController" bundle:bundle];
+    addViewController.delegate = self;
+    addViewController.collections = self.collections;
     
-    NSAlert *alert = [[NSAlert alloc] init];
-    alert.messageText = @"Lin";
-    [alert addButtonWithTitle:@"OK"];
-    [alert addButtonWithTitle:@"Cancel"];
-    alert.informativeText = @"Input a key/value for a new localization.";
-    alert.accessoryView = accessoryView;
-    
-    NSButton *button = [alert buttons][0];
-    accessoryView.button = button;
-    
-    // Set icon
-    NSString *filePath = [bundle pathForResource:@"icon120" ofType:@"tiff"];
-    NSImage *icon = [[NSImage alloc] initWithContentsOfFile:filePath];
-    [alert setIcon:icon];
-    
-    // Show alert
-    switch ([alert runModal]) {
-        case NSAlertFirstButtonReturn:
-        {
-            // Create a new localization
-            LNAlertAccessoryView *accessoryView = (LNAlertAccessoryView *)alert.accessoryView;
-            
-            LNLocalizationCollection *collection = accessoryView.selectedCollection;
-            NSString *key = accessoryView.inputtedKey;
-            NSString *value = accessoryView.inputtedValue;
-            
-            LNLocalization *localization = [LNLocalization localizationWithKey:key
-                                                                         value:value
-                                                                   entityRange:NSMakeRange(NSNotFound, 0)
-                                                                      keyRange:NSMakeRange(NSNotFound, 0)
-                                                                    valueRange:NSMakeRange(NSNotFound, 0)
-                                                                    collection:collection];
-            
-            // Add localization to file
-            [collection addLocalization:localization];
-            
-            // Update
-            [self configureView];
-        }
-            
-        default:
-        {
-            // Post notification
-            [[NSNotificationCenter defaultCenter] postNotificationName:LNPopoverContentViewAlertDidDismissNotification
-                                                                object:self
-                                                              userInfo:nil];
-        }
-            break;
-    }
+    [self presentViewController:addViewController asPopoverRelativeToRect:((NSView *)sender).bounds ofView:sender preferredEdge:NSMinYEdge behavior:NSPopoverBehaviorTransient];
 }
 
 - (IBAction)deleteLocalization:(id)sender {
-    NSInteger selectedRow = [self.tableView selectedRow];
+    NSInteger selectedRow = self.tableView.selectedRow;
     
     if (selectedRow >= 0) {
         [self.tableView beginUpdates];
@@ -205,7 +177,6 @@ static NSString * const EVOPopoverContentViewCellReuseIdentifier = @"EVOPopoverC
     // Post notification
     [[NSNotificationCenter defaultCenter] postNotificationName:LNPopoverContentViewDetachButtonDidClickNotification object:self userInfo:nil];
 }
-
 
 #pragma mark - Updating and Drawing the View
 
@@ -279,6 +250,30 @@ static NSString * const EVOPopoverContentViewCellReuseIdentifier = @"EVOPopoverC
 - (void)tableView:(NSTableView *)tableView sortDescriptorsDidChange:(NSArray *)oldDescriptors {
     // Update
     [self configureView];
+}
+
+#pragma mark - AddViewControllerDelegate
+
+- (void)addViewControllerDidCancel:(AddViewController *)addViewController {
+    // TODO: post notification?
+    // [[NSNotificationCenter defaultCenter] postNotificationName:LNPopoverContentViewAlertDidDismissNotification
+    //                                                                object:self
+    //
+    [self dismissViewController:addViewController];
+}
+
+- (void)addViewController:(AddViewController *)addViewController didFinishWithLocalization:(LNLocalization *)localization forCollection:(LNLocalizationCollection *)collection {
+    // Add localization to file
+    [collection addLocalization:localization];
+    
+    // Update views
+    [self configureView];
+    
+    // TODO: post notification?
+    // [[NSNotificationCenter defaultCenter] postNotificationName:LNPopoverContentViewAlertDidDismissNotification
+    //                                                                object:self
+    //                                                              userInfo:nil];
+    [self dismissViewController:addViewController];
 }
 
 @end

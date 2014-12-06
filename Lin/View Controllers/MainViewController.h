@@ -16,8 +16,8 @@ extern NSString * const LNPopoverContentViewDetachButtonDidClickNotification;
 
 @interface MainViewController : NSViewController
 
+@property (nonatomic, assign, getter=isInPopover) BOOL inPopover;
 @property (nonatomic, weak, readonly) NSTableView *tableView;
-@property (nonatomic, weak, readonly) NSButton *detachButton;
 @property (nonatomic, copy) NSArray *collections;
 @property (nonatomic, copy) NSString *searchString;
 

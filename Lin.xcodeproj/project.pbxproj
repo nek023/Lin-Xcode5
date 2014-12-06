@@ -7,11 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2B0E049B1A3385AE0052E29D /* AddViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B0E049A1A3385AE0052E29D /* AddViewController.m */; };
 		2B2FEC9B1A2F894500D0534D /* MainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B2FEC9A1A2F894500D0534D /* MainViewController.m */; };
 		2BC7C6A51A2FC3C60065C278 /* Media.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2BC7C6A41A2FC3C60065C278 /* Media.xcassets */; };
 		2BC7C6A81A2FC4690065C278 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 2BC7C6AA1A2FC4690065C278 /* InfoPlist.strings */; };
-		AA02CE8B17EE08240041C2BD /* LNAlertAccessoryView.xib in Resources */ = {isa = PBXBuildFile; fileRef = AA02CE8A17EE08240041C2BD /* LNAlertAccessoryView.xib */; };
-		AA02CE8E17EE083A0041C2BD /* LNAlertAccessoryView.m in Sources */ = {isa = PBXBuildFile; fileRef = AA02CE8D17EE083A0041C2BD /* LNAlertAccessoryView.m */; };
+		AA02CE8B17EE08240041C2BD /* AddViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = AA02CE8A17EE08240041C2BD /* AddViewController.xib */; };
 		AA1B7DA717C3C1EC00A3A6D7 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AA1B7DA617C3C1EC00A3A6D7 /* Cocoa.framework */; };
 		AA1B7DBA17C3C20F00A3A6D7 /* Lin.m in Sources */ = {isa = PBXBuildFile; fileRef = AA1B7DB917C3C20F00A3A6D7 /* Lin.m */; };
 		AA2980B417EE2C5300CF46E3 /* LNUserDefaultsManager.m in Sources */ = {isa = PBXBuildFile; fileRef = AA2980B317EE2C5300CF46E3 /* LNUserDefaultsManager.m */; };
@@ -56,13 +56,13 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		2B0E04991A3385AE0052E29D /* AddViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddViewController.h; sourceTree = "<group>"; };
+		2B0E049A1A3385AE0052E29D /* AddViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddViewController.m; sourceTree = "<group>"; };
 		2B2FEC991A2F894500D0534D /* MainViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainViewController.h; sourceTree = "<group>"; };
 		2B2FEC9A1A2F894500D0534D /* MainViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainViewController.m; sourceTree = "<group>"; };
 		2BC7C6A41A2FC3C60065C278 /* Media.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Media.xcassets; sourceTree = "<group>"; };
 		2BC7C6A91A2FC4690065C278 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
-		AA02CE8A17EE08240041C2BD /* LNAlertAccessoryView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LNAlertAccessoryView.xib; sourceTree = "<group>"; };
-		AA02CE8C17EE083A0041C2BD /* LNAlertAccessoryView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LNAlertAccessoryView.h; sourceTree = "<group>"; };
-		AA02CE8D17EE083A0041C2BD /* LNAlertAccessoryView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LNAlertAccessoryView.m; sourceTree = "<group>"; };
+		AA02CE8A17EE08240041C2BD /* AddViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AddViewController.xib; sourceTree = "<group>"; };
 		AA11AC4017C66F0200889DFB /* DVTFilePath.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DVTFilePath.h; sourceTree = "<group>"; };
 		AA11AC4317C6746800889DFB /* IDEIndex.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IDEIndex.h; sourceTree = "<group>"; };
 		AA11AC4617C6755400889DFB /* IDEIndexCollection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IDEIndexCollection.h; sourceTree = "<group>"; };
@@ -147,6 +147,8 @@
 		2B2FEC981A2F890C00D0534D /* View Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				2B0E04991A3385AE0052E29D /* AddViewController.h */,
+				2B0E049A1A3385AE0052E29D /* AddViewController.m */,
 				2B2FEC991A2F894500D0534D /* MainViewController.h */,
 				2B2FEC9A1A2F894500D0534D /* MainViewController.m */,
 			);
@@ -156,7 +158,7 @@
 		2BC7C6A31A2FC3A10065C278 /* XIBs */ = {
 			isa = PBXGroup;
 			children = (
-				AA02CE8A17EE08240041C2BD /* LNAlertAccessoryView.xib */,
+				AA02CE8A17EE08240041C2BD /* AddViewController.xib */,
 				AA95FDEB17EB48A9007D33D4 /* MainViewController.xib */,
 			);
 			path = XIBs;
@@ -338,8 +340,6 @@
 		AADDDAA017C4A3BA00BBA67C /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				AA02CE8C17EE083A0041C2BD /* LNAlertAccessoryView.h */,
-				AA02CE8D17EE083A0041C2BD /* LNAlertAccessoryView.m */,
 				AAAC873117ED9D4F00BF251D /* LNHorizontalLine.h */,
 				AAAC873217ED9D4F00BF251D /* LNHorizontalLine.m */,
 				AAAC873917EDA9CF00BF251D /* LNPopoverWindow.h */,
@@ -433,7 +433,7 @@
 			files = (
 				AA95FDEC17EB48A9007D33D4 /* MainViewController.xib in Resources */,
 				2BC7C6A81A2FC4690065C278 /* InfoPlist.strings in Resources */,
-				AA02CE8B17EE08240041C2BD /* LNAlertAccessoryView.xib in Resources */,
+				AA02CE8B17EE08240041C2BD /* AddViewController.xib in Resources */,
 				2BC7C6A51A2FC3C60065C278 /* Media.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -457,9 +457,9 @@
 				AA7D4DB117C74CFE0092DF8A /* LNLocalizationCollection.m in Sources */,
 				AAB0CD3417C448200085E913 /* LNRegularExpressionPattern+type.m in Sources */,
 				AAAC873B17EDA9CF00BF251D /* LNPopoverWindow.m in Sources */,
-				AA02CE8E17EE083A0041C2BD /* LNAlertAccessoryView.m in Sources */,
 				AA470D5E17C3D05D005CBB7F /* LNEntity.m in Sources */,
 				AA7D4DB417C74D0A0092DF8A /* LNLocalization.m in Sources */,
+				2B0E049B1A3385AE0052E29D /* AddViewController.m in Sources */,
 				AAB0CD3117C4382D0085E913 /* LNRegularExpressionPattern.m in Sources */,
 				AA1B7DBA17C3C20F00A3A6D7 /* Lin.m in Sources */,
 				AAAC873317ED9D4F00BF251D /* LNHorizontalLine.m in Sources */,
