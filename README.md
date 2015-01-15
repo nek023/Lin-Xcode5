@@ -38,7 +38,11 @@ In window mode, the search field can be used to find the localization with a fre
 
 
 ## Installation
-Download the project and build it, then relaunch Xcode.  
+
+1. [Download Lin-Xcode6 from GitHub](https://github.com/sascha/Lin-Xcode6/archive/master.zip)
+2. Open Lin.xcodeproj and build (⌘B)
+3. Relaunch Xcode
+
 Lin will be installed in `~/Library/Application Support/Developer/Shared/Xcode/Plug-ins` automatically.
 
 If you want to uninstall Lin, remove Lin.xcplugin in `Plug-ins` directory.
