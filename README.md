@@ -10,6 +10,8 @@ Lin for Xcode 4 (previous version)
 [questbeat/Lin](https://github.com/questbeat/Lin)
 
 
+## Note: Xcode 6 or later
+This plugin is not actively maintained, so it doesn't support Xcode 6 or later.
 
 
 ## Features
