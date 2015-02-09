@@ -375,7 +375,7 @@ static Lin *_sharedPlugin = nil;
     
     // Copy popover content
     LNPopoverContentView *popoverContentView = (LNPopoverContentView *)self.popover.contentViewController.view;
-    LNPopoverContentView *popoverWindowContentView = (LNPopoverContentView *)self.popoverWindowController.contentViewController.view;
+    LNPopoverContentView *popoverWindowContentView = (LNPopoverContentView *)self.popoverWindowController.lin_contentViewController.view;
     popoverWindowContentView.tableView.sortDescriptors = popoverContentView.tableView.sortDescriptors;
     popoverWindowContentView.collections = popoverContentView.collections;
     popoverWindowContentView.searchString = popoverContentView.searchString;
@@ -492,7 +492,7 @@ static Lin *_sharedPlugin = nil;
     // Prepare window
     NSArray *collections = [self.workspaceLocalizations objectForKey:self.currentWorkspaceFilePath];
     
-    LNPopoverContentView *popoverWindowContentView = (LNPopoverContentView *)self.popoverWindowController.contentViewController.view;
+    LNPopoverContentView *popoverWindowContentView = (LNPopoverContentView *)self.popoverWindowController.lin_contentViewController.view;
     popoverWindowContentView.collections = collections;
     popoverWindowContentView.searchString = @"";
     
@@ -547,7 +547,7 @@ static Lin *_sharedPlugin = nil;
                 LNPopoverContentView *contentView = (LNPopoverContentView *)self.popover.contentViewController.view;
                 contentView.collections = collections;
             } else if ([self.popoverWindowController.window isVisible]) {
-                LNPopoverContentView *contentView = (LNPopoverContentView *)self.popoverWindowController.contentViewController.view;
+                LNPopoverContentView *contentView = (LNPopoverContentView *)self.popoverWindowController.lin_contentViewController.view;
                 contentView.collections = collections;
             }
         }
@@ -585,7 +585,7 @@ static Lin *_sharedPlugin = nil;
         
         // Stick popover at the beginning of the key
         NSRange keyRange = NSMakeRange(lineRange.location + entity.keyRange.location, 1);
-        NSRect keyRectOnScreen = [textView firstRectForCharacterRange:keyRange];
+        NSRect keyRectOnScreen = [textView firstRectForCharacterRange:keyRange actualRange:NULL];
         NSRect keyRectOnWindow = [textView.window convertRectFromScreen:keyRectOnScreen];
         NSRect keyRectOnTextView = [textView convertRect:keyRectOnWindow fromView:nil];
         
@@ -595,7 +595,7 @@ static Lin *_sharedPlugin = nil;
         
         if ([self.popoverWindowController.window isVisible]) {
             // Update popover content
-            LNPopoverContentView *contentView = (LNPopoverContentView *)self.popoverWindowController.contentViewController.view;
+            LNPopoverContentView *contentView = (LNPopoverContentView *)self.popoverWindowController.lin_contentViewController.view;
             contentView.collections = collections;
             contentView.searchString = key;
         } else {
@@ -627,7 +627,7 @@ static Lin *_sharedPlugin = nil;
         // Update popover content
         NSArray *collections = [self.workspaceLocalizations objectForKey:self.currentWorkspaceFilePath];
         
-        LNPopoverContentView *contentView = (LNPopoverContentView *)self.popoverWindowController.contentViewController.view;
+        LNPopoverContentView *contentView = (LNPopoverContentView *)self.popoverWindowController.lin_contentViewController.view;
         contentView.collections = collections;
         contentView.searchString = nil;
     } else {

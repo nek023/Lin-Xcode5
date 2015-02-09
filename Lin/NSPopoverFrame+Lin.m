@@ -80,6 +80,7 @@
     CGImageRelease(backgroundImageRef);
     
     CGContextRelease(context);
+    CGColorSpaceRelease(colorSpace);
     
     CGContextRestoreGState(currentContext);
     

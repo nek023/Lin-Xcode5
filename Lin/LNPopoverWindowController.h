@@ -14,7 +14,7 @@ extern NSString * const LNPopoverWindowControllerWindowWillCloseNotification;
 
 @interface LNPopoverWindowController : NSWindowController <NSWindowDelegate, NSToolbarDelegate, NSTextFieldDelegate>
 
-@property (nonatomic, strong) NSViewController *contentViewController;
+@property (nonatomic, strong) NSViewController *lin_contentViewController;
 
 - (instancetype)initWithContentViewController:(NSViewController *)contentViewController;
 
