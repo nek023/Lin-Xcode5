@@ -6,13 +6,11 @@ It lets you search/manage localizations without opening the .strings files.
 
 ![01.png](https://raw.github.com/questbeat/Lin-Xcode5/master/screenshots/01.png)
 
-Lin for Xcode 4 (previous version)  
-[questbeat/Lin](https://github.com/questbeat/Lin)
-
 
 ## Note: Xcode 6 or later
-This plugin is not actively maintained, so it doesn't support Xcode 6 or later.  
-The future version is planned to be developed on the [questbeat/Lin](https://github.com/questbeat/Lin) repo.
+This version does not support Xcode 6 or later.  
+Please use the latest version of [questbeat/Lin](https://github.com/questbeat/Lin).
+
 
 ## Features
 When you are focusing on NSLocalizedString or other functions to get a localized version of a string, Lin shows the list of localizations that contains the inputted key string.
