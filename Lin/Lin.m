@@ -165,7 +165,7 @@ static Lin *_sharedPlugin = nil;
     LNPopoverContentView *contentView = (LNPopoverContentView *)contentViewController.view;
     [contentView.detachButton setHidden:YES];
     
-    LNPopoverWindowController *popoverWindowController = [[LNPopoverWindowController alloc] initWithContentViewController:contentViewController];
+    LNPopoverWindowController *popoverWindowController = [[LNPopoverWindowController alloc] initWithPopoverContentViewController:contentViewController];
     
     self.popoverWindowController = popoverWindowController;
 }
@@ -375,7 +375,7 @@ static Lin *_sharedPlugin = nil;
     
     // Copy popover content
     LNPopoverContentView *popoverContentView = (LNPopoverContentView *)self.popover.contentViewController.view;
-    LNPopoverContentView *popoverWindowContentView = (LNPopoverContentView *)self.popoverWindowController.lin_contentViewController.view;
+    LNPopoverContentView *popoverWindowContentView = (LNPopoverContentView *)self.popoverWindowController.popoverContentViewController.view;
     popoverWindowContentView.tableView.sortDescriptors = popoverContentView.tableView.sortDescriptors;
     popoverWindowContentView.collections = popoverContentView.collections;
     popoverWindowContentView.searchString = popoverContentView.searchString;
@@ -492,7 +492,7 @@ static Lin *_sharedPlugin = nil;
     // Prepare window
     NSArray *collections = [self.workspaceLocalizations objectForKey:self.currentWorkspaceFilePath];
     
-    LNPopoverContentView *popoverWindowContentView = (LNPopoverContentView *)self.popoverWindowController.lin_contentViewController.view;
+    LNPopoverContentView *popoverWindowContentView = (LNPopoverContentView *)self.popoverWindowController.popoverContentViewController.view;
     popoverWindowContentView.collections = collections;
     popoverWindowContentView.searchString = @"";
     
@@ -547,7 +547,7 @@ static Lin *_sharedPlugin = nil;
                 LNPopoverContentView *contentView = (LNPopoverContentView *)self.popover.contentViewController.view;
                 contentView.collections = collections;
             } else if ([self.popoverWindowController.window isVisible]) {
-                LNPopoverContentView *contentView = (LNPopoverContentView *)self.popoverWindowController.lin_contentViewController.view;
+                LNPopoverContentView *contentView = (LNPopoverContentView *)self.popoverWindowController.popoverContentViewController.view;
                 contentView.collections = collections;
             }
         }
@@ -595,7 +595,7 @@ static Lin *_sharedPlugin = nil;
         
         if ([self.popoverWindowController.window isVisible]) {
             // Update popover content
-            LNPopoverContentView *contentView = (LNPopoverContentView *)self.popoverWindowController.lin_contentViewController.view;
+            LNPopoverContentView *contentView = (LNPopoverContentView *)self.popoverWindowController.popoverContentViewController.view;
             contentView.collections = collections;
             contentView.searchString = key;
         } else {
@@ -627,7 +627,7 @@ static Lin *_sharedPlugin = nil;
         // Update popover content
         NSArray *collections = [self.workspaceLocalizations objectForKey:self.currentWorkspaceFilePath];
         
-        LNPopoverContentView *contentView = (LNPopoverContentView *)self.popoverWindowController.lin_contentViewController.view;
+        LNPopoverContentView *contentView = (LNPopoverContentView *)self.popoverWindowController.popoverContentViewController.view;
         contentView.collections = collections;
         contentView.searchString = nil;
     } else {

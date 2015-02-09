@@ -100,7 +100,7 @@ static NSString * const kLNPopoverWindowToolbarSearchFieldIdentifier = @"Search"
 - (void)controlTextDidChange:(NSNotification *)obj
 {
     LNPopoverWindowController *popoverWindowController = (LNPopoverWindowController *)self.windowController;
-    LNPopoverContentView *contentView = (LNPopoverContentView *)popoverWindowController.lin_contentViewController.view;
+    LNPopoverContentView *contentView = (LNPopoverContentView *)popoverWindowController.popoverContentViewController.view;
     
     contentView.searchString = self.searchField.stringValue;
 }

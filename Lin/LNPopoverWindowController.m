@@ -15,7 +15,7 @@ NSString * const LNPopoverWindowControllerWindowWillCloseNotification = @"LNPopo
 
 @implementation LNPopoverWindowController
 
-- (instancetype)initWithContentViewController:(NSViewController *)contentViewController
+- (instancetype)initWithPopoverContentViewController:(NSViewController *)popoverContentViewController
 {
     LNPopoverWindow *popoverWindow = [LNPopoverWindow popoverWindow];
     popoverWindow.delegate = self;
@@ -23,7 +23,7 @@ NSString * const LNPopoverWindowControllerWindowWillCloseNotification = @"LNPopo
     self = [super initWithWindow:popoverWindow];
     
     if (self) {
-        self.lin_contentViewController = contentViewController;
+        self.popoverContentViewController = popoverContentViewController;
     }
     
     return self;
@@ -32,19 +32,19 @@ NSString * const LNPopoverWindowControllerWindowWillCloseNotification = @"LNPopo
 
 #pragma mark - Accessors
 
-- (void)setLin_contentViewController:(NSViewController *)contentViewController
+- (void)setPopoverContentViewController:(NSViewController *)popoverContentViewController
 {
     // Remove previous content view
-    if (self.lin_contentViewController) {
-        [self.lin_contentViewController.view removeFromSuperview];
+    if (self.popoverContentViewController) {
+        [self.popoverContentViewController.view removeFromSuperview];
     }
     
-    _lin_contentViewController = contentViewController;
+    _popoverContentViewController = popoverContentViewController;
     
     // Set content view of the window
-    self.lin_contentViewController.view.autoresizingMask = NSViewWidthSizable | NSViewHeightSizable;
-    [self.window.contentView setFrame:self.lin_contentViewController.view.bounds];
-    [self.window.contentView addSubview:self.lin_contentViewController.view];
+    self.popoverContentViewController.view.autoresizingMask = NSViewWidthSizable | NSViewHeightSizable;
+    [self.window.contentView setFrame:self.popoverContentViewController.view.bounds];
+    [self.window.contentView addSubview:self.popoverContentViewController.view];
 }
 
 
