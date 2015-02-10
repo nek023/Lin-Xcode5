@@ -36,7 +36,8 @@
                                            [LNRegularExpressionPattern patternWithType:LNEntityTypeLocalizedStringForKey],
                                            [LNRegularExpressionPattern patternWithType:LNEntityTypeLocalizedStringFromTable],
                                            [LNRegularExpressionPattern patternWithType:LNEntityTypeLocalizedStringFromTableInBundle],
-                                           [LNRegularExpressionPattern patternWithType:LNEntityTypeLocalizedStringWithDefaultValue]
+                                           [LNRegularExpressionPattern patternWithType:LNEntityTypeLocalizedStringWithDefaultValue],
+                                           [LNRegularExpressionPattern patternWithType:LNEntityTypeCustomLocalizedStringOnlyForKey]
                                            ];
     }
     
