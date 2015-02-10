@@ -18,5 +18,6 @@
 @property (nonatomic, copy, readonly) LNLocalizationCollection *selectedCollection;
 @property (nonatomic, copy, readonly) NSString *inputtedKey;
 @property (nonatomic, copy, readonly) NSString *inputtedValue;
+@property (nonatomic, copy, readonly) NSString *inputtedComment;
 
 @end

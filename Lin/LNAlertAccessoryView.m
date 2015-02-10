@@ -17,6 +17,7 @@
 @property (weak) IBOutlet NSPopUpButton *languageButton;
 @property (weak) IBOutlet NSTextField *keyTextField;
 @property (weak) IBOutlet NSTextField *valueTextField;
+@property (weak) IBOutlet NSTextField *commentTextField;
 
 @end
 
@@ -71,6 +72,10 @@
     return self.valueTextField.stringValue;
 }
 
+- (NSString *)inputtedComment
+{
+    return self.commentTextField.stringValue;
+}
 
 #pragma mark - Actions
 
@@ -123,6 +128,7 @@
 {
     NSString *key = self.keyTextField.stringValue;
     NSString *value = self.valueTextField.stringValue;
+    // comment is optional
     
     [self.button setEnabled:(self.collections.count > 0 && key.length > 0 && value.length > 0)];
 }

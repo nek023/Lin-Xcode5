@@ -110,6 +110,7 @@ NSString * const LNPopoverContentViewDetachButtonDidClickNotification = @"LNPopo
         
         NSString *key = localization.key;
         NSString *value = localization.value;
+        NSString *comment = localization.comment;
         
         NSString *columnIdentifier = [self.tableView editedColumnIdentifier];
         
@@ -117,10 +118,13 @@ NSString * const LNPopoverContentViewDetachButtonDidClickNotification = @"LNPopo
             key = textView.textStorage.string;
         } else if ([columnIdentifier isEqualToString:@"value"]) {
             value = textView.textStorage.string;
+        } else if ([columnIdentifier isEqualToString:@"comment"]) {
+            comment = textView.textStorage.string;
         }
-        
+    
         LNLocalization *newLocalization = [LNLocalization localizationWithKey:key
                                                                         value:value
+                                                                      comment:comment
                                                                   entityRange:localization.entityRange
                                                                      keyRange:localization.keyRange
                                                                    valueRange:localization.valueRange
@@ -184,9 +188,11 @@ NSString * const LNPopoverContentViewDetachButtonDidClickNotification = @"LNPopo
             LNLocalizationCollection *collection = accessoryView.selectedCollection;
             NSString *key = accessoryView.inputtedKey;
             NSString *value = accessoryView.inputtedValue;
+            NSString *comment = accessoryView.inputtedComment;
             
             LNLocalization *localization = [LNLocalization localizationWithKey:key
                                                                          value:value
+                                                                       comment:comment
                                                                    entityRange:NSMakeRange(NSNotFound, 0)
                                                                       keyRange:NSMakeRange(NSNotFound, 0)
                                                                     valueRange:NSMakeRange(NSNotFound, 0)
@@ -308,6 +314,9 @@ NSString * const LNPopoverContentViewDetachButtonDidClickNotification = @"LNPopo
     }
     else if ([identifier isEqualToString:@"value"]) {
         return localization.value;
+    }
+    else if ([identifier isEqualToString:@"comment"]) {
+        return localization.comment;
     }
     
     return nil;

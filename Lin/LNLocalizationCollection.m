@@ -36,7 +36,10 @@
         
         // Extract language designation
         NSArray *pathComponents = [filePath pathComponents];
-        self.languageDesignation = [[pathComponents objectAtIndex:pathComponents.count - 2] stringByDeletingPathExtension];
+        // The superdir is shown in parentheses to distinguish possible duplicate name-language combos
+        self.languageDesignation = [NSString stringWithFormat:@"%@ (%@)",
+                                    [[pathComponents objectAtIndex:pathComponents.count - 2] stringByDeletingPathExtension],
+                                    [pathComponents objectAtIndex:pathComponents.count - 3]];
         
         // Update
         [self reloadLocalizations];
@@ -93,59 +96,44 @@
     if (contents) {
         NSMutableSet *localizations = [NSMutableSet set];
         
-        // Parse
-        __block NSInteger lineOffset = 0;
-        __block NSString *key;
-        __block NSString *value;
-        __block NSRange entityRange;
-        __block NSRange keyRange;
-        __block NSRange valueRange;
+        // to keep it simple for now comments are only accepted if
+        //   * the comment is C-style
+        //   * the comment is on the line above the key-value
+        //   * the comment is followed by no whitespace except one new line
+        //   * the key-value line is not prefixed with any whitespace
+        // this can be changed later on when time allows :)
+        // example found below:        
+        //               v - no whitespace here except newline
+        // /* Comment */
+        // @"key" = @"value";
+        // ^ - no whitespace here
         
-        NSRegularExpression *regularExpression = [NSRegularExpression regularExpressionWithPattern:@"(\"(\\S+.*\\S+)\"|(\\S+.*\\S+))\\s*=\\s*\"(.*)\";$"
+        NSRegularExpression *regularExpression = [NSRegularExpression regularExpressionWithPattern:
+                                                  @"(?#comment)(?:/\\*(.*)\\*/\n)?"
+                                                  @"(?#key    )(?:\"(.*)\"|(\\S+))"
+                                                  @"(?#equals )\\s*=\\s*"
+                                                  @"(?#value  )\"(.*)\";"
                                                                                            options:0
-                                                                                             error:NULL];
+                                                                                             error:nil];
         
-        [contents enumerateLinesUsingBlock:^(NSString *line, BOOL *stop) {
-            key = nil;
-            value = nil;
-            keyRange = NSMakeRange(NSNotFound, 0);
-            valueRange = NSMakeRange(NSNotFound, 0);
+        [regularExpression enumerateMatchesInString:contents options:0 range:NSMakeRange(0, [contents length]) usingBlock:^(NSTextCheckingResult *result, NSMatchingFlags flags, BOOL *stop) {
+            NSString *comment = nil;
             
-            NSTextCheckingResult *result = [regularExpression firstMatchInString:line
-                                                                         options:0
-                                                                           range:NSMakeRange(0, line.length)];
+            NSRange entityRange  = [result rangeAtIndex:0];
+            NSRange commentRange = [result rangeAtIndex:1];
+            NSRange keyRange     = [result rangeAtIndex:2].location != NSNotFound ? [result rangeAtIndex:2] : [result rangeAtIndex:3];
+            NSRange valueRange   = [result rangeAtIndex:4];
             
-            if (result.range.location != NSNotFound && result.numberOfRanges == 5) {
-                entityRange = [result rangeAtIndex:0];
-                entityRange.location += lineOffset;
-                
-                keyRange = [result rangeAtIndex:2];
-                if (keyRange.location == NSNotFound) keyRange = [result rangeAtIndex:3];
-                
-                valueRange = [result rangeAtIndex:4];
-                
-                key = [line substringWithRange:keyRange];
-                value = [line substringWithRange:valueRange];
-                
-                keyRange.location += lineOffset;
-                valueRange.location += lineOffset;
-            }
+            if (commentRange.location != NSNotFound)
+                comment = [contents substringWithRange:commentRange];
             
-            // Create localization
-            if (key != nil && value != nil) {
-                LNLocalization *localization = [LNLocalization localizationWithKey:key
-                                                                             value:value
-                                                                       entityRange:entityRange
-                                                                          keyRange:keyRange
-                                                                        valueRange:valueRange
-                                                                        collection:self];
-                
-                [localizations addObject:localization];
-            }
-            
-            // Move offset
-            NSRange lineRange = [contents lineRangeForRange:NSMakeRange(lineOffset, 0)];
-            lineOffset += lineRange.length;
+            [localizations addObject:[LNLocalization localizationWithKey:[contents substringWithRange:keyRange]
+                                                                   value:[contents substringWithRange:valueRange]
+                                                                 comment:comment
+                                                             entityRange:entityRange
+                                                                keyRange:keyRange
+                                                              valueRange:valueRange
+                                                              collection:self]];
         }];
         
         self.localizations = localizations;
@@ -154,70 +142,79 @@
     }
 }
 
+- (NSString *)formatEntity:(LNLocalization *)localization
+{
+    NSString *comment = @"";
+    
+    if (localization.comment && [localization.comment length] > 0) {
+        // Add spaces at the ends if needed
+        NSString *prefix = [localization.comment hasPrefix:@" "] ? @"" : @" ";
+        NSString *suffix = [localization.comment hasSuffix:@" "] ? @"" : @" ";
+        
+        comment = [NSString stringWithFormat:@"/*%@%@%@*/\n", prefix, localization.comment, suffix];
+    }
+    
+    return [NSString stringWithFormat:@"%@\"%@\" = \"%@\";", comment, localization.key, localization.value];
+}
+
+- (void)writeContents:(NSString *)contents withRange:(NSRange)range replacedWithString:(NSString *)string
+{
+    // Override
+    NSError *error = nil;
+    [[contents stringByReplacingCharactersInRange:range withString:string] writeToFile:self.filePath atomically:NO encoding:NSUTF8StringEncoding error:&error];
+    
+    if (error) {
+        NSLog(@"Error: %@", [error localizedDescription]);
+    }
+
+    // Reload
+    [self reloadLocalizations];
+}
+
 - (void)addLocalization:(LNLocalization *)localization
 {
     // Load contents
     NSString *contents = [self loadContentsOfFile:self.filePath];
+    __block NSRange range = NSMakeRange([contents length], 0); // Starting point if no trailing white space found
     
-    // Add
-    if (![contents hasSuffix:@"\n"]) {
-        contents = [contents stringByAppendingString:@"\n"];
-    }
+    NSRegularExpression *regularExpression = [NSRegularExpression regularExpressionWithPattern:
+                                              @"(?#capture trailing whitespace)(\\s+)$"
+                                                                                       options:0
+                                                                                         error:nil];
     
-    contents = [contents stringByAppendingFormat:@"\"%@\" = \"%@\";\n", localization.key, localization.value];
+    [regularExpression enumerateMatchesInString:contents options:0 range:NSMakeRange(0, [contents length]) usingBlock:^(NSTextCheckingResult *result, NSMatchingFlags flags, BOOL *stop) {
+        range = [result rangeAtIndex:1];
+    }];
     
-    // Override
-    NSError *error = nil;
-    [contents writeToFile:self.filePath atomically:NO encoding:NSUTF8StringEncoding error:&error];
-    
-    if (error) {
-        NSLog(@"Error: %@", [error localizedDescription]);
-    }
-    
-    // Reload
-    [self reloadLocalizations];
+    [self writeContents:contents withRange:range replacedWithString:[NSString stringWithFormat:@"\n\n%@\n", [self formatEntity:localization]]];
 }
 
 - (void)deleteLocalization:(LNLocalization *)localization
 {
+    NSCharacterSet *whitespace = [NSCharacterSet whitespaceAndNewlineCharacterSet];
+    
     // Load contents
     NSString *contents = [self loadContentsOfFile:self.filePath];
     
-    // Delete line
-    NSRange lineRange = [contents lineRangeForRange:localization.entityRange];
-    contents = [contents stringByReplacingCharactersInRange:lineRange withString:@""];
+    NSRange range = localization.entityRange; // Starting point
     
-    // Override
-    NSError *error = nil;
-    [contents writeToFile:self.filePath atomically:NO encoding:NSUTF8StringEncoding error:&error];
-    
-    if (error) {
-        NSLog(@"Error: %@", [error localizedDescription]);
+    // Expand range left if whitespace is present
+    while (range.location > 0 && [whitespace characterIsMember:[contents characterAtIndex:range.location - 1]]) {
+        range.location--;
+        range.length++;
     }
     
-    // Reload
-    [self reloadLocalizations];
+    // Expand range right if whitespace is present
+    while (NSMaxRange(range) < [contents length] && [whitespace characterIsMember:[contents characterAtIndex:NSMaxRange(range)]]) {
+        range.length++;
+    }
+    
+    [self writeContents:[self loadContentsOfFile:self.filePath] withRange:range replacedWithString:@"\n\n"];
 }
 
 - (void)replaceLocalization:(LNLocalization *)localization withLocalization:(LNLocalization *)newLocalization
 {
-    // Load contents
-    NSString *contents = [self loadContentsOfFile:self.filePath];
-    
-    // Replace
-    NSString *newEntity = [NSString stringWithFormat:@"\"%@\" = \"%@\";", newLocalization.key, newLocalization.value];
-    contents = [contents stringByReplacingCharactersInRange:localization.entityRange withString:newEntity];
-    
-    // Override
-    NSError *error = nil;
-    [contents writeToFile:self.filePath atomically:NO encoding:NSUTF8StringEncoding error:&error];
-    
-    if (error) {
-        NSLog(@"Error: %@", [error localizedDescription]);
-    }
-    
-    // Reload
-    [self reloadLocalizations];
+    [self writeContents:[self loadContentsOfFile:self.filePath] withRange:localization.entityRange replacedWithString:[self formatEntity:newLocalization]];
 }
 
 @end

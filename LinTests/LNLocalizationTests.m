@@ -67,6 +67,7 @@
     for (NSInteger i = 0; i < numberOfTestSets; i++) {
         LNLocalization *localization = [LNLocalization localizationWithKey:testSets[i].key
                                                                      value:testSets[i].value
+                                                                   comment:nil
                                                                entityRange:NSMakeRange(0, 0)
                                                                   keyRange:NSMakeRange(0, 0)
                                                                 valueRange:NSMakeRange(0, 0)
